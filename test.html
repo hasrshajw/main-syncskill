@@ -133,12 +133,12 @@
             box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2);
         }
 
-        /* FADE EFFECT FOR LOTTIE */
+        /* --- LOTTIE FADE EFFECT --- */
         .hero-right { 
             flex: 0.7; 
             display: flex; 
             justify-content: flex-end; 
-            /* Linear mask to create top and bottom fade */
+            /* Creates a smooth transparency gradient at the top and bottom */
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
