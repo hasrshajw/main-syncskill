@@ -7,22 +7,24 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <style>
         :root {
-            /* Shared Colors & Fonts */
-            --font-main: 'IBM Plex Sans', sans-serif;
+            /* Section 1 Variables */
             --color-dark-teal: #002726;
             --color-accent-green: #33C375;
             --color-accent-hover: #52e094;
             --color-white: #ffffff;
             --color-grid-lines: rgba(255, 255, 255, 0.04);
+            --font-main-s1: 'IBM Plex Sans', sans-serif;
 
-            /* Dashboard Section Variables */
+            /* Section 2 Variables */
+            --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+            --font-inter: 'Inter', sans-serif;
             --text-dark: #002b35; 
             --text-medium: #546e7a;       
             --border-light: rgba(0,0,0,0.06);
@@ -40,11 +42,11 @@
 
         body {
             background-color: #fcfcfc;
-            font-family: var(--font-main); /* Applied globally */
+            font-family: var(--font-inter);
             overflow-x: hidden;
         }
 
-        /* --- SECTION 1: HERO --- */
+        /* --- SECTION 1 STYLES --- */
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
@@ -100,6 +102,7 @@
             line-height: 1.15;
             letter-spacing: -0.02em;
             margin-bottom: 1.25rem;
+            font-family: var(--font-main-s1);
         }
 
         .hero-heading span.top-text { display: block; }
@@ -118,7 +121,7 @@
             font-weight: 600;
             font-size: 1rem;
             padding: 1rem 2.2rem;
-            border-radius: 12px; /* Updated to match screenshot */
+            border-radius: 3rem;
             border: none;
             cursor: pointer;
             display: inline-flex;
@@ -136,7 +139,7 @@
 
         .hero-right { flex: 0.7; display: flex; justify-content: flex-end; }
 
-        /* --- SECTION 2: DASHBOARD --- */
+        /* --- SECTION 2 STYLES --- */
         .dashboard-container {
             width: 92%;
             max-width: 1400px;
@@ -164,8 +167,9 @@
 
         .section-title-dash {
             font-size: 1.8rem; 
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-dark);
+            font-family: var(--font-jakarta);
             letter-spacing: -0.02em;
             margin-bottom: 4px;
         }
@@ -194,7 +198,7 @@
         .feature-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
-            border-radius: 12px; /* Matches button style */
+            border-radius: 14px;
             padding: 12px 18px;
             width: 240px;
             display: flex;
@@ -214,7 +218,7 @@
         }
         
         .icon-box svg { width: 20px; height: 20px; stroke-width: 2.5px; }
-        .card-title { font-weight: 700; font-size: 0.85rem; color: var(--text-dark); }
+        .card-title { font-weight: 700; font-size: 0.85rem; color: var(--text-dark); font-family: var(--font-jakarta); }
         .card-desc { font-size: 0.7rem; color: var(--text-medium); white-space: nowrap; }
 
         .dash-right-animation {
@@ -238,9 +242,12 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            .hero-heading { font-size: 2.5rem; }
+            .content-card { padding: 3rem 2rem; }
             .hero-flex { flex-direction: column; align-items: flex-start; }
-            .dashboard-container { height: auto; flex-direction: column; }
+            .hero-heading { font-size: 2.5rem; }
+            .hero-right { width: 100%; justify-content: center; margin-top: 2rem; }
+            
+            .dashboard-container { height: auto; flex-direction: column; width: 92%; }
             .dash-left-main, .dash-right-animation { height: 220px; }
         }
     </style>
@@ -329,6 +336,7 @@
     </section>
 
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
