@@ -40,7 +40,7 @@
 
         body {
             background-color: #fcfcfc;
-            font-family: var(--font-main); /* Applied globally */
+            font-family: var(--font-main);
             overflow-x: hidden;
         }
 
@@ -118,7 +118,7 @@
             font-weight: 600;
             font-size: 1rem;
             padding: 1rem 2.2rem;
-            border-radius: 12px; /* Updated to match screenshot */
+            border-radius: 12px;
             border: none;
             cursor: pointer;
             display: inline-flex;
@@ -134,7 +134,23 @@
             box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2);
         }
 
-        .hero-right { flex: 0.7; display: flex; justify-content: flex-end; }
+        /* --- BLUR FADE EFFECT ON ANIMATION --- */
+        .hero-right { 
+            flex: 0.7; 
+            display: flex; 
+            justify-content: flex-end;
+            position: relative;
+            /* Creates the fade-out effect towards the top */
+            -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
+            mask-image: linear-gradient(to top, black 60%, transparent 100%);
+        }
+
+        .lottie-hero {
+            width: 100%; 
+            max-width: 360px;
+            /* Subtle blur to soften the top edge */
+            filter: blur(0.5px); 
+        }
 
         /* --- SECTION 2: DASHBOARD --- */
         .dashboard-container {
@@ -194,7 +210,7 @@
         .feature-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
-            border-radius: 12px; /* Matches button style */
+            border-radius: 12px;
             padding: 12px 18px;
             width: 240px;
             display: flex;
@@ -269,10 +285,10 @@
 
                 <div class="hero-right">
                     <lottie-player
+                        class="lottie-hero"
                         src="./bg.json" 
                         background="transparent"
                         speed="0.8"
-                        style="width: 100%; max-width: 360px;"
                         loop
                         autoplay>
                     </lottie-player>
