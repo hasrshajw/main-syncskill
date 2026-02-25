@@ -23,7 +23,7 @@
             --text-light: #94a3b8;
             --bg-body: #f8fafc;
             --bg-subtle: #f8fafc;
-            --border-light: #e2e8f0;
+            --border-light: #cbd5e1; /* Slightly darker border for better visibility */
             --primary-accent: #2FBF71;
             --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1); 
             --shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.08);
@@ -39,7 +39,14 @@
             --font-4xl: 2.25rem;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; outline: none; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-font-smoothing: antialiased; 
+            outline: none; 
+            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile */
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -136,12 +143,6 @@
             cursor: pointer;
         }
 
-        .course-card-new:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-premium);
-            border-color: transparent;
-        }
-
         .card-img-container {
             width: 100%;
             aspect-ratio: 4/3;
@@ -157,10 +158,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
-        }
-
-        .course-card-new:hover .card-img-container img {
-            transform: scale(1.06);
         }
 
         .card-badge {
@@ -226,12 +223,6 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
             font-family: var(--font-main);
         }
-        
-        .btn-soft:hover {
-            background-color: var(--primary-accent);
-            color: white;
-            box-shadow: 0 8px 16px rgba(47, 191, 113, 0.25);
-        }
 
         .meta-row {
             display: flex; gap: 12px;
@@ -249,17 +240,32 @@
         .tag-green { color: #16a34a; background-color: #f0fdf4; }
 
         /* =========================================
-           RESPONSIVE DESIGN
+           RESPONSIVE DESIGN & HOVER STATES
            ========================================= */
-        @media (min-width: 1101px) {
+        
+        /* Apply Hover lift ONLY on Desktop so mobile/tablet users don't see it when tapping */
+        @media (min-width: 1025px) {
             .container-lg { padding: 0; margin: 0 auto; }
+            
+            .course-card-new:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-premium);
+                border-color: transparent;
+            }
+
+            .course-card-new:hover .card-img-container img {
+                transform: scale(1.06);
+            }
+
+            .btn-soft:hover {
+                background-color: var(--primary-accent);
+                color: white;
+                box-shadow: 0 8px 16px rgba(47, 191, 113, 0.25);
+            }
         }
 
-        @media (max-width: 1100px) {
-            .courses-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        }
-
-        @media (max-width: 600px) {
+        /* Tablet & Mobile Slider Layout */
+        @media (max-width: 1024px) {
             .courses-section { padding: 50px 0; }
             .headline { font-size: var(--font-3xl); }
             .subheadline { font-size: var(--font-base); }
@@ -268,7 +274,7 @@
             .category-section { margin-bottom: 40px; }
             .category-heading { font-size: var(--font-lg); margin-bottom: 16px; }
 
-            /* Horizontal Slider for Mobile */
+            /* Horizontal Slider for Tablet & Mobile */
             .courses-grid { 
                 display: flex; 
                 overflow-x: auto; 
@@ -288,6 +294,7 @@
             .course-card-new { 
                 flex: 0 0 280px; 
                 scroll-snap-align: center;
+                transform: none !important; /* Forces layout stability on press */
             }
         }
     </style>
