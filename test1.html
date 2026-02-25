@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Explore Top Courses</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* =========================================
+           GLOBAL VARIABLES & RESET
+           ========================================= */
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif, 'Inter';
+            --font-heading: 'IBM Plex Sans', sans-serif;
+            --text-dark: #0f172a;        
+            --text-medium: #475569;        
+            --text-light: #94a3b8;
+            --bg-body: #f8fafc;
+            --bg-subtle: #f8fafc;
+            --border-light: #e2e8f0;
+            --primary-accent: #2FBF71;
+            --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1); 
+            --shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --section-container-width: 1200px;
+            
+            /* Font Sizes */
+            --font-xs: 0.75rem;
+            --font-sm: 0.875rem;
+            --font-base: 1rem;
+            --font-lg: 1.125rem;
+            --font-xl: 1.25rem;
+            --font-3xl: 1.875rem;
+            --font-4xl: 2.25rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; outline: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           COURSES UI SECTION
+           ========================================= */
+        .courses-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll on body */
+        }
+
+        .container-lg {
+            width: 100%;
+            max-width: var(--section-container-width);
+            padding: 0 24px;
+        }
+
+        /* --- Header Styles --- */
+        .section-header-left {
+            text-align: left;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        
+        .headline {
+            font-size: var(--font-4xl);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            font-family: var(--font-heading);
+        }
+
+        .subheadline {
+            font-size: var(--font-base);
+            color: var(--text-medium);
+            line-height: 1.6;
+            font-family: var(--font-heading);
+            font-weight: 400;
+        }
+
+        /* --- Grid Layout --- */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        /* --- Course Card Design --- */
+        .course-card-new {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s var(--ease-spring);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .course-card-new:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-premium);
+            border-color: transparent;
+        }
+
+        .card-img-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--bg-subtle);
+            margin-bottom: 16px;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .course-card-new:hover .card-img-container img {
+            transform: scale(1.06);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: var(--font-xs); font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 2;
+            font-family: var(--font-main);
+        }
+
+        .card-body {
+            padding: 4px 8px 8px 8px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .course-name {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            font-family: var(--font-heading);
+        }
+
+        .course-info {
+            font-size: var(--font-sm);
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: var(--font-heading);
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-soft {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background-color: #F1FBF5;
+            color: #166534;
+            font-size: var(--font-sm);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: var(--font-main);
+        }
+        
+        .btn-soft:hover {
+            background-color: var(--primary-accent);
+            color: white;
+            box-shadow: 0 8px 16px rgba(47, 191, 113, 0.25);
+        }
+
+        .mobile-link-arrow { display: none; }
+
+        .meta-row {
+            display: flex; gap: 12px;
+            font-size: var(--font-xs); font-weight: 600; color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        
+        .meta-item { display: flex; align-items: center; gap: 4px; }
+
+        .tag-orange { color: #ea580c; background-color: #fff7ed; }
+        .tag-blue { color: #0284c7; background-color: #f0f9ff; }
+        .tag-purple { color: #7c3aed; background-color: #f5f3ff; }
+        .tag-dark { color: #334155; background-color: #f1f5f9; }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+           ========================================= */
+        @media (min-width: 1101px) {
+            .container-lg { padding: 0; margin: 0 auto; }
+        }
+
+        @media (max-width: 1100px) {
+            .courses-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        }
+
+        @media (max-width: 600px) {
+            .courses-section { padding: 40px 0; }
+            .headline { font-size: var(--font-3xl); }
+            .subheadline { font-size: var(--font-base); padding: 0 10px; }
+            .section-header-left { text-align: left; padding: 0 10px; margin-bottom: 30px; }
+            
+            /* Horizontal Slider for Mobile */
+            .courses-grid { 
+                display: flex; 
+                overflow-x: auto; 
+                gap: 16px; 
+                /* Negative margin to allow cards to slide edge-to-edge of screen */
+                margin: 0 -24px; 
+                /* Match padding to container so the first card lines up */
+                padding: 0 24px 20px 24px; 
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+            
+            .courses-grid::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+
+            /* Fixed width cards for sliding */
+            .course-card-new { 
+                flex: 0 0 280px; 
+                scroll-snap-align: center; /* Snaps cards neatly into view */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="courses-section">
+        <div class="container-lg">
+            
+            <div class="section-header-left">
+                <h2 class="headline">Explore Top Courses</h2>
+                <p class="subheadline">Master the most in-demand skills with our structured learning paths designed for beginners and pros alike.</p>
+            </div>
+
+            <div class="courses-grid">
+                
+                <div class="course-card-new">
+                    <div class="card-img-container">
+                        <div class="card-badge tag-blue">Frontend</div>
+                        <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=800&auto=format&fit=crop" alt="Web Dev">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="course-name">HTML & CSS Master</h3>
+                        
+                        <div class="meta-row">
+                            <div class="meta-item"><i data-lucide="book" width="14"></i> 12 Lessons</div>
+                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 6h 30m</div>
+                        </div>
+
+                        <p class="course-info">Build responsive and modern web interfaces from scratch using latest standards.</p>
+                        
+                        <div class="card-footer">
+                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card-new">
+                    <div class="card-img-container">
+                        <div class="card-badge tag-orange">Backend</div>
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" alt="Java">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="course-name">Java Data Structures</h3>
+                        
+                        <div class="meta-row">
+                            <div class="meta-item"><i data-lucide="book" width="14"></i> 24 Lessons</div>
+                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 15m</div>
+                        </div>
+
+                        <p class="course-info">Master DSA and prepare for technical interviews with optimized code.</p>
+                        
+                        <div class="card-footer">
+                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card-new">
+                    <div class="card-img-container">
+                        <div class="card-badge tag-dark">System</div>
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" alt="C++">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="course-name">C++ System Design</h3>
+                        
+                        <div class="meta-row">
+                            <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 45m</div>
+                        </div>
+
+                        <p class="course-info">Learn memory management, performance, and building scalable systems.</p>
+                        
+                        <div class="card-footer">
+                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card-new">
+                    <div class="card-img-container">
+                        <div class="card-badge tag-purple">Data</div>
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop" alt="SQL">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="course-name">SQL & Databases</h3>
+                        
+                        <div class="meta-row">
+                            <div class="meta-item"><i data-lucide="book" width="14"></i> 15 Lessons</div>
+                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 00m</div>
+                        </div>
+
+                        <p class="course-info">Design schemas and query large datasets efficiently for production apps.</p>
+                        
+                        <div class="card-footer">
+                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render all Lucide Icons
+            lucide.createIcons();
+
+            // Add interactivity to Course Cards
+            const courseCards = document.querySelectorAll('.course-card-new');
+            courseCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const courseName = this.querySelector('.course-name').textContent;
+                    alert(`Navigating to details page for: ${courseName}`);
+                });
+            });
+
+            // Add interactivity to 'View Course' Buttons (Preventing double click events)
+            const viewBtns = document.querySelectorAll('.btn-soft');
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Stops the parent card click event from firing
+                    const courseName = this.closest('.course-card-new').querySelector('.course-name').textContent;
+                    alert(`Button clicked! Navigating to: ${courseName}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
