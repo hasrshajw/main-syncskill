@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <style>
+        /* ----- GLOBAL & ROOT VARIABLES (keep original) ----- */
         :root {
             --font-main: 'IBM Plex Sans', sans-serif;
             --color-dark-teal: #002726;
@@ -43,7 +44,7 @@
             overflow-x: hidden;
         }
 
-        /* --- SECTION 1: HERO --- */
+        /* --- SECTION 1: HERO (unchanged) --- */
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
@@ -133,17 +134,15 @@
             box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2);
         }
 
-        /* --- LOTTIE FADE EFFECT --- */
         .hero-right { 
             flex: 0.7; 
             display: flex; 
             justify-content: flex-end; 
-            /* Creates a smooth transparency gradient at the top and bottom */
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
 
-        /* --- SECTION 2: DASHBOARD --- */
+        /* --- SECTION 2: DASHBOARD (unchanged) --- */
         .dashboard-container {
             width: 92%;
             max-width: 1400px;
@@ -242,77 +241,174 @@
         .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
         .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
 
-        /* --- RESPONSIVE --- */
-        /* --- RESPONSIVE ADJUSTMENTS --- */
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 992px) {
-    .content-card {
-        padding: 2.5rem 1.5rem; 
-        text-align: center;
-        /* Re-applying the grid and noise with correct shorthand to keep visibility */
-        background-color: var(--color-dark-teal);
-        background-image: 
-            linear-gradient(var(--color-grid-lines) 1px, transparent 1px),
-            linear-gradient(90deg, var(--color-grid-lines) 1px, transparent 1px),
-            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        background-size: 60px 60px, 60px 60px, 120px 120px; /* Slightly smaller grid for mobile */
-        background-blend-mode: normal, normal, overlay;
-    }
+        /* --- SECTION 3: SKILLS CAROUSEL (added, variables scoped) --- */
+        .skills-section {
+            --skills-text-dark: #2D2F31;
+            --skills-text-light: #6A6F73;
+            --skills-card-bg: #F7F9FA;
+            --skills-gap: 24px;
 
-    .content-card::before {
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%);
-    }
+            width: 90%;
+            max-width: 1400px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
 
-    .hero-flex {
-        flex-direction: column-reverse; /* Lottie at the top */
-        gap: 1.5rem;
-    }
+        .skills-intro { text-align: left; }
+        .skills-intro h2 {
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--skills-text-dark);
+            margin-bottom: 16px;
+        }
+        .skills-intro h2 span { font-style: italic; font-weight: 400; }
+        .skills-intro p {
+            font-size: 16px;
+            color: var(--skills-text-light);
+            line-height: 1.6;
+        }
 
-    .hero-right {
-        flex: none;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 0.5rem;
-        /* Ensure the fade effect works on the top/bottom of the Lottie in mobile too */
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-    }
+        .carousel-viewport { overflow: hidden; position: relative; }
 
-    .hero-left {
-        flex: none;
-        width: 100%;
-    }
+        .card-wrapper {
+            display: flex;
+            gap: var(--skills-gap);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 10px 0;
+            will-change: transform;
+        }
 
-    .hero-heading {
-        font-size: 2.2rem;
-        line-height: 1.2;
-    }
+        .skill-card {
+            flex: 0 0 calc((100% - (var(--skills-gap) * 2)) / 3);
+            height: 400px;
+            background-color: var(--skills-card-bg);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
 
-    .hero-paragraph {
-        font-size: 1rem;
-        margin: 0 auto 1.5rem auto;
-        max-width: 100%;
-    }
+        .card-footer {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
 
-    .dashboard-container {
-        height: auto;
-        flex-direction: column;
-    }
+        .card-footer span {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--skills-text-dark);
+        }
 
-    .dash-left-main, .dash-right-animation {
-        height: 240px; /* Kept closer to original height for consistency */
-    }
-}
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            border: 1px solid #D1D7DC;
+            background: white;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-dark-teal);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+        .nav-btn:not(:disabled):hover {
+            background: var(--color-dark-teal);
+            color: white;
+        }
+
+        .dots { display: flex; gap: 8px; }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #D1D7DC;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--color-accent-green);
+        }
+
+        /* Responsive for skills section */
+        @media (max-width: 1100px) {
+            .skills-section {
+                grid-template-columns: 1fr;
+            }
+            .skill-card {
+                flex: 0 0 calc((100% - var(--skills-gap)) / 2);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .skills-section {
+                width: 92%;
+                margin: 30px auto;
+            }
+            .skill-card {
+                flex: 0 0 200px;
+                height: 280px;
+            }
+            .nav-btn { display: none; }
+        }
+
+        /* Responsive adjustments for hero (keep original) */
+        @media (max-width: 992px) {
+            .content-card {
+                padding: 2.5rem 1.5rem; 
+                text-align: center;
+                background-color: var(--color-dark-teal);
+                background-image: 
+                    linear-gradient(var(--color-grid-lines) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--color-grid-lines) 1px, transparent 1px),
+                    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                background-size: 60px 60px, 60px 60px, 120px 120px;
+                background-blend-mode: normal, normal, overlay;
+            }
+            .content-card::before {
+                top: 0; left: 50%; transform: translateX(-50%);
+                width: 100%; height: 100%;
+                background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%);
+            }
+            .hero-flex { flex-direction: column-reverse; gap: 1.5rem; }
+            .hero-right { flex: none; width: 100%; justify-content: center; }
+            .hero-left { flex: none; width: 100%; }
+            .hero-heading { font-size: 2.2rem; line-height: 1.2; }
+            .hero-paragraph { font-size: 1rem; margin: 0 auto 1.5rem auto; max-width: 100%; }
+            .dashboard-container { height: auto; flex-direction: column; }
+            .dash-left-main, .dash-right-animation { height: 240px; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- SECTION 1: HERO -->
     <section class="hero-section">
         <div class="content-card">
             <div class="hero-flex">
@@ -332,7 +428,6 @@
                         </svg>
                     </a>
                 </div>
-
                 <div class="hero-right">
                     <lottie-player
                         src="./bg.json" 
@@ -347,13 +442,13 @@
         </div>
     </section>
 
+    <!-- SECTION 2: DASHBOARD -->
     <section class="dashboard-container">
         <div class="dash-left-main">
             <div class="section-header-dash">
                 <h2 class="section-title-dash">10M+ Learners</h2>
                 <p class="section-subtitle-dash">have reaped benefits from our programs</p>
             </div>
-
             <div class="marquee-wrapper">
                 <div class="marquee-row">
                     <div class="feature-card" style="--theme-color: #6366f1;">
@@ -379,7 +474,6 @@
                 </div>
             </div>
         </div>
-
         <div class="dash-right-animation">
             <div class="lottie-container">
                 <lottie-player
@@ -394,8 +488,106 @@
         </div>
     </section>
 
+    <!-- SECTION 3: SKILLS CAROUSEL (added) -->
+    <section class="skills-section">
+        <div class="skills-intro">
+            <h2>Learn <span>essential</span> career and <span>life</span> skills</h2>
+            <p>SyncSkill helps you build in-demand skills fast and advance your career in a changing job market.</p>
+        </div>
+
+        <div class="carousel-viewport">
+            <div class="card-wrapper" id="cardWrapper">
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600')"><div class="card-footer"><span>Generative AI</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600')"><div class="card-footer"><span>IT Certifications</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1551288049-bbda38a5f452?w=600')"><div class="card-footer"><span>Data Science</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600')"><div class="card-footer"><span>Cybersecurity</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600')"><div class="card-footer"><span>Product Design</span><i data-lucide="arrow-right"></i></div></div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="nav-btn" id="prevBtn"><i data-lucide="chevron-left"></i></button>
+                <div class="dots" id="dotContainer"></div>
+                <button class="nav-btn" id="nextBtn"><i data-lucide="chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined Script: Lucide icons + Carousel logic -->
     <script>
+        // Initialize Lucide icons (will replace all [data-lucide] attributes)
         lucide.createIcons();
+
+        // ----- Skills Carousel Logic -----
+        (function() {
+            const wrapper = document.getElementById('cardWrapper');
+            const dotsContainer = document.getElementById('dotContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const cards = document.querySelectorAll('.skill-card');
+            let currentIndex = 0;
+
+            function getVisibleCount() {
+                if (window.innerWidth <= 600) return 1;
+                if (window.innerWidth <= 1100) return 2;
+                return 3;
+            }
+
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const visibleCards = getVisibleCount();
+                const maxScrollPositions = cards.length - visibleCards + 1;
+
+                for (let i = 0; i < maxScrollPositions; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateCarousel() {
+                const visibleCards = getVisibleCount();
+                const maxIndex = cards.length - visibleCards;
+                
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+                const cardWidth = cards[0].getBoundingClientRect().width;
+                const gap = parseFloat(getComputedStyle(wrapper).gap) || 24; // fallback
+                const moveAmount = currentIndex * (cardWidth + gap);
+
+                wrapper.style.transform = `translateX(-${moveAmount}px)`;
+                
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= maxIndex;
+
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function goToSlide(i) {
+                currentIndex = i;
+                updateCarousel();
+            }
+
+            prevBtn.addEventListener('click', () => { if (currentIndex > 0) currentIndex--; updateCarousel(); });
+            nextBtn.addEventListener('click', () => { 
+                const maxIndex = cards.length - getVisibleCount();
+                if (currentIndex < maxIndex) currentIndex++; 
+                updateCarousel(); 
+            });
+
+            window.addEventListener('resize', () => {
+                createDots();
+                updateCarousel();
+            });
+
+            // Initial setup
+            createDots();
+            updateCarousel();
+        })();
     </script>
 </body>
 </html>
