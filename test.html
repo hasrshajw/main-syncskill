@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>SyncSkill | Become Top 1%</title>
+    
     <link rel="icon" type="image/x-icon" href="./syncskill-favicon.ico">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,13 +23,18 @@
             --color-white: #ffffff;
             --color-grid-lines: rgba(255, 255, 255, 0.04);
 
-            /* Dashboard Section Variables */
+            /* UI Variables */
             --text-dark: #002b35; 
             --text-medium: #546e7a;       
             --border-light: rgba(0,0,0,0.06);
             --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1);
             --dash-height: 240px;
             --bg-cream: #fdfaf2; 
+            --card-bg: #F7F9FA;
+
+            /* Carousel Math */
+            --card-width: 320px;
+            --card-gap: 24px;
         }
 
         * {
@@ -69,15 +76,6 @@
             display: flex;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            top: -20%; left: -10%;
-            width: 60%; height: 140%;
-            background: radial-gradient(circle, rgba(51, 195, 117, 0.07) 0%, transparent 70%);
-            pointer-events: none;
         }
 
         .hero-flex {
@@ -133,12 +131,10 @@
             box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2);
         }
 
-        /* --- LOTTIE FADE EFFECT --- */
         .hero-right { 
             flex: 0.7; 
             display: flex; 
             justify-content: flex-end; 
-            /* Creates a smooth transparency gradient at the top and bottom */
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
@@ -208,7 +204,6 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            transition: transform 0.3s var(--ease-out);
         }
 
         .icon-box {
@@ -220,10 +215,6 @@
             flex-shrink: 0;
         }
         
-        .icon-box svg { width: 20px; height: 20px; stroke-width: 2.5px; }
-        .card-title { font-weight: 700; font-size: 0.85rem; color: var(--text-dark); }
-        .card-desc { font-size: 0.7rem; color: var(--text-medium); white-space: nowrap; }
-
         .dash-right-animation {
             flex: 1;
             background: #ffffff;
@@ -234,20 +225,123 @@
             justify-content: center;
         }
 
-        .lottie-container { width: 100%; height: 100%; max-width: 600px; max-height: 600px; }
-
-        .dash-left-main::before, .dash-left-main::after {
-            content: ""; position: absolute; top: 90px; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+        /* --- SECTION 3: SKILLS CAROUSEL --- */
+        .skills-section {
+            width: 90%;
+            max-width: 1400px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            align-items: center;
         }
-        .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
-        .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
+
+        .skills-intro h2 {
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .skills-intro h2 span { font-style: italic; font-weight: 400; }
+
+        .skills-intro p {
+            font-size: clamp(14px, 2vw, 16px);
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        /* Fixed 3-card Viewport */
+        .carousel-viewport { 
+            overflow: hidden; 
+            position: relative; 
+            width: calc((var(--card-width) * 3) + (var(--card-gap) * 2));
+            max-width: 100%;
+        }
+
+        .card-wrapper {
+            display: flex;
+            gap: var(--card-gap);
+            transition: transform 0.5s var(--ease-out);
+            padding: 10px 0;
+            will-change: transform;
+        }
+
+        .skill-card {
+            min-width: var(--card-width);
+            height: 420px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .card-footer {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card-footer span { font-weight: 600; color: var(--text-dark); font-size: 13px; }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .nav-btn {
+            border: 1px solid #D1D7DC;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-dark-teal);
+        }
+
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 7px; height: 7px; background: #D1D7DC; border-radius: 50%; cursor: pointer; }
+        .dot.active { width: 20px; border-radius: 4px; background: var(--color-accent-green); }
 
         /* --- RESPONSIVE --- */
+        @media (max-width: 1400px) {
+            .carousel-viewport { width: 100%; }
+        }
+
+        @media (max-width: 1100px) {
+            .skills-section { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 992px) {
             .hero-heading { font-size: 2.5rem; }
             .hero-flex { flex-direction: column; align-items: flex-start; }
             .dashboard-container { height: auto; flex-direction: column; }
             .dash-left-main, .dash-right-animation { height: 220px; }
+        }
+
+        @media (max-width: 600px) {
+            :root { --card-width: 260px; --card-gap: 16px; }
+            .skill-card { min-width: var(--card-width); height: 340px; }
+            .nav-btn { display: none; }
         }
     </style>
 </head>
@@ -272,16 +366,8 @@
                         </svg>
                     </a>
                 </div>
-
                 <div class="hero-right">
-                    <lottie-player
-                        src="./bg.json" 
-                        background="transparent"
-                        speed="0.8"
-                        style="width: 100%; max-width: 360px;"
-                        loop
-                        autoplay>
-                    </lottie-player>
+                    <lottie-player src="./bg.json" background="transparent" speed="0.8" style="width: 100%; max-width: 360px;" loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
@@ -293,49 +379,98 @@
                 <h2 class="section-title-dash">10M+ Learners</h2>
                 <p class="section-subtitle-dash">have reaped benefits from our programs</p>
             </div>
-
             <div class="marquee-wrapper">
                 <div class="marquee-row">
-                    <div class="feature-card" style="--theme-color: #6366f1;">
-                        <div class="icon-box"><i data-lucide="zap"></i></div>
-                        <div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div>
-                    </div>
-                    <div class="feature-card" style="--theme-color: #ec4899;">
-                        <div class="icon-box"><i data-lucide="shield-check"></i></div>
-                        <div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div>
-                    </div>
-                    <div class="feature-card" style="--theme-color: #f59e0b;">
-                        <div class="icon-box"><i data-lucide="layers"></i></div>
-                        <div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div>
-                    </div>
-                    <div class="feature-card" style="--theme-color: #10b981;">
-                        <div class="icon-box"><i data-lucide="users"></i></div>
-                        <div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div>
-                    </div>
                     <div class="feature-card" style="--theme-color: #6366f1;"><div class="icon-box"><i data-lucide="zap"></i></div><div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div></div>
                     <div class="feature-card" style="--theme-color: #ec4899;"><div class="icon-box"><i data-lucide="shield-check"></i></div><div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div></div>
                     <div class="feature-card" style="--theme-color: #f59e0b;"><div class="icon-box"><i data-lucide="layers"></i></div><div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div></div>
                     <div class="feature-card" style="--theme-color: #10b981;"><div class="icon-box"><i data-lucide="users"></i></div><div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div></div>
+                    <div class="feature-card" style="--theme-color: #6366f1;"><div class="icon-box"><i data-lucide="zap"></i></div><div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div></div>
+                    <div class="feature-card" style="--theme-color: #ec4899;"><div class="icon-box"><i data-lucide="shield-check"></i></div><div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div></div>
                 </div>
             </div>
         </div>
-
         <div class="dash-right-animation">
-            <div class="lottie-container">
-                <lottie-player
-                    src="./animation.json" 
-                    background="transparent"
-                    speed="0.8"
-                    style="width: 100%; height: 100%;" 
-                    loop
-                    autoplay>
-                </lottie-player>
+            <lottie-player src="./animation.json" background="transparent" speed="0.8" style="width: 100%; max-width: 600px;" loop autoplay></lottie-player>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <div class="skills-intro">
+            <h2>Learn <span>essential</span> career and <span>life</span> skills</h2>
+            <p>SyncSkill helps you build in-demand skills fast and advance your career.</p>
+        </div>
+        <div class="carousel-viewport" id="viewport">
+            <div class="card-wrapper" id="cardWrapper">
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400')"><div class="card-footer"><span>Generative AI</span><i data-lucide="arrow-right" size="14"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400')"><div class="card-footer"><span>IT Certifications</span><i data-lucide="arrow-right" size="14"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1551288049-bbda38a5f452?w=400')"><div class="card-footer"><span>Data Science</span><i data-lucide="arrow-right" size="14"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400')"><div class="card-footer"><span>Cybersecurity</span><i data-lucide="arrow-right" size="14"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400')"><div class="card-footer"><span>Product Design</span><i data-lucide="arrow-right" size="14"></i></div></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="nav-btn" id="prevBtn"><i data-lucide="chevron-left"></i></button>
+                <div class="dots" id="dotContainer"></div>
+                <button class="nav-btn" id="nextBtn"><i data-lucide="chevron-right"></i></button>
             </div>
         </div>
     </section>
 
     <script>
         lucide.createIcons();
+
+        // Carousel Logic
+        const wrapper = document.getElementById('cardWrapper');
+        const dotsContainer = document.getElementById('dotContainer');
+        const cards = document.querySelectorAll('.skill-card');
+        const viewport = document.getElementById('viewport');
+        let currentIndex = 0;
+
+        // Generate dots
+        cards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            const style = getComputedStyle(document.documentElement);
+            const gap = parseInt(style.getPropertyValue('--card-gap')) || 24;
+            const cardWidth = cards[0].offsetWidth;
+            const offset = currentIndex * (cardWidth + gap);
+            
+            wrapper.style.transform = `translateX(${-offset}px)`;
+            
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function moveSlide(direction) {
+            // Loop back logic
+            currentIndex = (currentIndex + direction + cards.length) % cards.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        document.getElementById('nextBtn').onclick = () => moveSlide(1);
+        document.getElementById('prevBtn').onclick = () => moveSlide(-1);
+
+        // Touch support for swiping
+        let touchStartX = 0;
+        viewport.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+        viewport.addEventListener('touchend', e => { 
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) moveSlide(diff > 0 ? 1 : -1);
+        }, {passive: true});
+
+        window.addEventListener('resize', updateCarousel);
     </script>
 </body>
 </html>
