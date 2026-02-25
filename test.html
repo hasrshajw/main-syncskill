@@ -46,7 +46,8 @@
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
-            margin-bottom: 20px;
+            /* Improved spacing consistency */
+            margin-bottom: 40px; /* was 20px */
         }
 
         .content-card {
@@ -136,15 +137,16 @@
             flex: 0.7; 
             display: flex; 
             justify-content: flex-end; 
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            /* IMPROVED: softer fade effect - less aggressive transparency */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
         }
 
         /* --- SECTION 2: DASHBOARD --- */
         .dashboard-container {
             width: 92%;
             max-width: 1400px;
-            margin: 20px auto 40px auto;
+            margin: 0 auto 60px auto; /* Adjusted bottom margin for spacing */
             display: flex;
             gap: 20px;
             height: var(--dash-height);
@@ -233,8 +235,15 @@
 
         .lottie-container { width: 100%; height: 100%; max-width: 600px; max-height: 600px; }
 
+        /* IMPROVED: reduced width of gradient overlays to prevent card cutoff */
         .dash-left-main::before, .dash-left-main::after {
-            content: ""; position: absolute; top: 90px; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+            content: ""; 
+            position: absolute; 
+            top: 90px; 
+            bottom: 0; 
+            width: 60px;  /* was 100px */
+            z-index: 2; 
+            pointer-events: none;
         }
         .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
         .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
@@ -248,7 +257,7 @@
 
             width: 90%;
             max-width: 1400px;
-            margin: 60px auto;
+            margin: 0 auto 60px auto; /* Consistent bottom spacing */
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 40px;
@@ -272,8 +281,7 @@
         .carousel-viewport {
             overflow: hidden;
             position: relative;
-            /* Ensure touch events are captured */
-            touch-action: pan-y; /* Allow vertical scroll, horizontal will be handled by JS */
+            touch-action: pan-y;
         }
 
         .card-wrapper {
@@ -282,7 +290,6 @@
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             padding: 10px 0;
             will-change: transform;
-            /* No user-select to avoid accidental text selection while swiping */
             user-select: none;
         }
 
@@ -300,7 +307,7 @@
             border: 1px solid rgba(0,0,0,0.05);
             box-sizing: border-box;
             transition: transform 0.3s ease;
-            pointer-events: auto; /* Ensure buttons inside are clickable */
+            pointer-events: auto;
         }
 
         .card-footer {
@@ -311,18 +318,15 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            pointer-events: none; /* Let clicks pass to the card if needed, but we want the arrow icon to be non-interactive */
+            pointer-events: none;
         }
-        /* But we want the card itself to be clickable? Not needed now. */
 
         .card-footer span {
             font-weight: 600;
             font-size: 14px;
             color: var(--skills-text-dark);
         }
-        .card-footer i {
-            pointer-events: none; /* arrow icon shouldn't block touch */
-        }
+        .card-footer i { pointer-events: none; }
 
         .carousel-controls {
             display: flex;
@@ -377,20 +381,37 @@
             }
         }
 
+        /* IMPROVED: mobile card heights */
         @media (max-width: 600px) {
             .skills-section {
                 width: 92%;
-                margin: 30px auto;
+                margin: 30px auto 60px auto;
             }
             .skill-card {
                 flex: 0 0 200px;
-                height: 280px;
+                height: auto;           /* Allow height to adjust to content */
+                min-height: 280px;       /* maintain minimum */
+                padding: 15px;           /* slightly smaller padding */
+            }
+            .card-footer {
+                padding: 10px 14px;      /* smaller footer on mobile */
+            }
+            .card-footer span {
+                font-size: 13px;          /* slightly smaller font */
             }
             .nav-btn { display: none; }
-            /* On mobile, we hide buttons but dots remain visible for manual navigation */
+            /* Increase touch target for dots */
+            .dot {
+                width: 12px;
+                height: 12px;
+                margin: 0 2px;
+            }
+            .dot.active {
+                width: 28px;
+            }
         }
 
-        /* Responsive adjustments for hero (unchanged) */
+        /* Responsive adjustments for hero (unchanged except mask already updated) */
         @media (max-width: 992px) {
             .content-card {
                 padding: 2.5rem 1.5rem; 
@@ -409,7 +430,14 @@
                 background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%);
             }
             .hero-flex { flex-direction: column-reverse; gap: 1.5rem; }
-            .hero-right { flex: none; width: 100%; justify-content: center; }
+            .hero-right { 
+                flex: none; 
+                width: 100%; 
+                justify-content: center;
+                /* Keep improved mask on mobile too */
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+                mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            }
             .hero-left { flex: none; width: 100%; }
             .hero-heading { font-size: 2.2rem; line-height: 1.2; }
             .hero-paragraph { font-size: 1rem; margin: 0 auto 1.5rem auto; max-width: 100%; }
@@ -538,10 +566,9 @@
             const cards = document.querySelectorAll('.skill-card');
             let currentIndex = 0;
 
-            // Touch handling variables
             let touchStartX = 0;
             let touchEndX = 0;
-            const minSwipeDistance = 50; // minimum px to consider a swipe
+            const minSwipeDistance = 50;
 
             function getVisibleCount() {
                 if (window.innerWidth <= 600) return 1;
@@ -589,7 +616,6 @@
                 updateCarousel();
             }
 
-            // Touch event listeners
             wrapper.addEventListener('touchstart', (e) => {
                 touchStartX = e.changedTouches[0].screenX;
             }, { passive: true });
@@ -607,13 +633,11 @@
                 const maxIndex = cards.length - visibleCards;
 
                 if (deltaX > 0) {
-                    // Swipe right -> previous
                     if (currentIndex > 0) {
                         currentIndex--;
                         updateCarousel();
                     }
                 } else {
-                    // Swipe left -> next
                     if (currentIndex < maxIndex) {
                         currentIndex++;
                         updateCarousel();
@@ -621,7 +645,6 @@
                 }
             }
 
-            // Button listeners
             prevBtn.addEventListener('click', () => {
                 if (currentIndex > 0) currentIndex--;
                 updateCarousel();
@@ -633,19 +656,13 @@
                 updateCarousel(); 
             });
 
-            // Resize listener
             window.addEventListener('resize', () => {
                 createDots();
                 updateCarousel();
             });
 
-            // Initial setup
             createDots();
             updateCarousel();
-
-            // Optional: prevent vertical scroll interference while swiping horizontally
-            // We'll not prevent default to keep vertical scroll, but we can add a touchmove handler to cancel if mostly horizontal
-            // This is a minimal implementation that works.
         })();
     </script>
 </body>
