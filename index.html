@@ -7,13 +7,14 @@
     <link rel="icon" type="image/x-icon" href="./syncskill-favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Include all needed fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <style>
-        /* ----- GLOBAL & ROOT VARIABLES (unchanged) ----- */
+        /* ----- GLOBAL & ROOT VARIABLES (unified) ----- */
         :root {
             --font-main: 'IBM Plex Sans', sans-serif;
             --color-dark-teal: #002726;
@@ -27,6 +28,26 @@
             --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1);
             --dash-height: 240px;
             --bg-cream: #fdfaf2; 
+            
+            /* Courses section variables (unified to 1400px) */
+            --courses-font-main: 'Plus Jakarta Sans', sans-serif, 'Inter';
+            --courses-font-heading: 'IBM Plex Sans', sans-serif;
+            --courses-text-dark: #0f172a;
+            --courses-text-medium: #475569;
+            --courses-text-light: #94a3b8;
+            --courses-bg-subtle: #f8fafc;
+            --courses-border-light: #cbd5e1;
+            --courses-primary-accent: #2FBF71;
+            --courses-ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
+            --courses-shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --courses-container-width: 1400px; /* updated to 1400px */
+            --courses-font-xs: 0.75rem;
+            --courses-font-sm: 0.875rem;
+            --courses-font-base: 1rem;
+            --courses-font-lg: 1.125rem;
+            --courses-font-xl: 1.5rem;
+            --courses-font-3xl: 1.875rem;
+            --courses-font-4xl: 2.25rem;
         }
 
         * {
@@ -46,8 +67,7 @@
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
-            /* Improved spacing consistency */
-            margin-bottom: 40px; /* was 20px */
+            margin-bottom: 20px;
         }
 
         .content-card {
@@ -137,16 +157,15 @@
             flex: 0.7; 
             display: flex; 
             justify-content: flex-end; 
-            /* IMPROVED: softer fade effect - less aggressive transparency */
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
 
         /* --- SECTION 2: DASHBOARD --- */
         .dashboard-container {
             width: 92%;
             max-width: 1400px;
-            margin: 0 auto 60px auto; /* Adjusted bottom margin for spacing */
+            margin: 20px auto 40px auto;
             display: flex;
             gap: 20px;
             height: var(--dash-height);
@@ -235,20 +254,13 @@
 
         .lottie-container { width: 100%; height: 100%; max-width: 600px; max-height: 600px; }
 
-        /* IMPROVED: reduced width of gradient overlays to prevent card cutoff */
         .dash-left-main::before, .dash-left-main::after {
-            content: ""; 
-            position: absolute; 
-            top: 90px; 
-            bottom: 0; 
-            width: 60px;  /* was 100px */
-            z-index: 2; 
-            pointer-events: none;
+            content: ""; position: absolute; top: 90px; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
         }
         .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
         .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
 
-        /* --- SECTION 3: SKILLS CAROUSEL (with touch enhancements) --- */
+        /* --- SECTION 3: SKILLS CAROUSEL (with touch) --- */
         .skills-section {
             --skills-text-dark: #2D2F31;
             --skills-text-light: #6A6F73;
@@ -257,7 +269,7 @@
 
             width: 90%;
             max-width: 1400px;
-            margin: 0 auto 60px auto; /* Consistent bottom spacing */
+            margin: 60px auto;
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 40px;
@@ -371,47 +383,390 @@
             background: var(--color-accent-green);
         }
 
-        /* Responsive for skills section */
         @media (max-width: 1100px) {
-            .skills-section {
-                grid-template-columns: 1fr;
-            }
-            .skill-card {
-                flex: 0 0 calc((100% - var(--skills-gap)) / 2);
-            }
+            .skills-section { grid-template-columns: 1fr; }
+            .skill-card { flex: 0 0 calc((100% - var(--skills-gap)) / 2); }
         }
 
-        /* IMPROVED: mobile card heights */
         @media (max-width: 600px) {
-            .skills-section {
-                width: 92%;
-                margin: 30px auto 60px auto;
-            }
-            .skill-card {
-                flex: 0 0 200px;
-                height: auto;           /* Allow height to adjust to content */
-                min-height: 280px;       /* maintain minimum */
-                padding: 15px;           /* slightly smaller padding */
-            }
-            .card-footer {
-                padding: 10px 14px;      /* smaller footer on mobile */
-            }
-            .card-footer span {
-                font-size: 13px;          /* slightly smaller font */
-            }
+            .skills-section { width: 92%; margin: 30px auto; }
+            .skill-card { flex: 0 0 200px; height: 280px; }
             .nav-btn { display: none; }
-            /* Increase touch target for dots */
-            .dot {
-                width: 12px;
-                height: 12px;
-                margin: 0 2px;
+        }
+
+        /* --- SECTION 4 & 6: COURSES UI (shared styles, now with 1400px container) --- */
+        .courses-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            font-family: var(--courses-font-main);
+        }
+
+        .courses-section .container-lg {
+            width: 100%;
+            max-width: var(--courses-container-width);
+            margin: 0 auto; /* center */
+            padding: 0 24px;
+        }
+
+        .courses-section .section-header-left {
+            text-align: left;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        
+        .courses-section .headline {
+            font-size: var(--courses-font-4xl);
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            font-family: var(--courses-font-heading);
+        }
+
+        .courses-section .subheadline {
+            font-size: var(--courses-font-base);
+            color: var(--courses-text-medium);
+            line-height: 1.6;
+            font-family: var(--courses-font-heading);
+            font-weight: 400;
+        }
+
+        .courses-section .category-section {
+            margin-bottom: 60px;
+        }
+
+        .courses-section .category-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .courses-section .category-heading {
+            font-family: var(--courses-font-heading);
+            font-size: var(--courses-font-xl);
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            margin-bottom: 24px;
+            border-left: 4px solid var(--courses-primary-accent);
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .courses-section .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px; /* increased gap for better spacing at 1400px */
+        }
+
+        .courses-section .course-card-new {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid var(--courses-border-light);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s var(--courses-ease-spring);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .courses-section .card-img-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--courses-bg-subtle);
+            margin-bottom: 16px;
+        }
+
+        .courses-section .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .courses-section .card-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: var(--courses-font-xs);
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 2;
+            font-family: var(--courses-font-main);
+        }
+
+        .courses-section .card-body {
+            padding: 4px 8px 8px 8px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .courses-section .course-name {
+            font-size: var(--courses-font-lg);
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            font-family: var(--courses-font-heading);
+        }
+
+        .courses-section .course-info {
+            font-size: var(--courses-font-sm);
+            color: var(--courses-text-medium);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: var(--courses-font-heading);
+        }
+
+        .courses-section .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .courses-section .btn-soft {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background-color: #F1FBF5;
+            color: #166534;
+            font-size: var(--courses-font-sm);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: var(--courses-font-main);
+        }
+
+        .courses-section .meta-row {
+            display: flex; gap: 12px;
+            font-size: var(--courses-font-xs);
+            font-weight: 600;
+            color: var(--courses-text-light);
+            margin-bottom: 16px;
+        }
+        
+        .courses-section .meta-item { display: flex; align-items: center; gap: 4px; }
+
+        /* Tag Colors */
+        .courses-section .tag-orange { color: #ea580c; background-color: #fff7ed; }
+        .courses-section .tag-blue { color: #0284c7; background-color: #f0f9ff; }
+        .courses-section .tag-purple { color: #7c3aed; background-color: #f5f3ff; }
+        .courses-section .tag-dark { color: #334155; background-color: #f1f5f9; }
+        .courses-section .tag-green { color: #16a34a; background-color: #f0fdf4; }
+
+        /* Responsive for courses section */
+        @media (min-width: 1025px) {
+            .courses-section .container-lg { padding: 0; margin: 0 auto; }
+            
+            .courses-section .course-card-new:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--courses-shadow-premium);
+                border-color: transparent;
             }
-            .dot.active {
-                width: 28px;
+
+            .courses-section .course-card-new:hover .card-img-container img {
+                transform: scale(1.06);
+            }
+
+            .courses-section .btn-soft:hover {
+                background-color: var(--courses-primary-accent);
+                color: white;
+                box-shadow: 0 8px 16px rgba(47, 191, 113, 0.25);
             }
         }
 
-        /* Responsive adjustments for hero (unchanged except mask already updated) */
+        @media (max-width: 1024px) {
+            .courses-section { padding: 50px 0; }
+            .courses-section .headline { font-size: var(--courses-font-3xl); }
+            .courses-section .subheadline { font-size: var(--courses-font-base); }
+            .courses-section .section-header-left { text-align: left; margin-bottom: 40px; }
+            
+            .courses-section .category-section { margin-bottom: 40px; }
+            .courses-section .category-heading { font-size: var(--courses-font-lg); margin-bottom: 16px; }
+
+            .courses-section .courses-grid { 
+                display: flex; 
+                overflow-x: auto; 
+                gap: 16px; 
+                margin: 0 -24px; 
+                padding: 0 24px 20px 24px; 
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .courses-section .courses-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .courses-section .course-card-new { 
+                flex: 0 0 280px; 
+                scroll-snap-align: center;
+                transform: none !important;
+            }
+        }
+
+        /* --- SECTION 5: SCHOLARSHIP BANNER --- */
+        .scholarship-outer-wrapper {
+            width: 100%;
+            background-color: #FFF9EE;
+            margin: 40px 0;
+            overflow: hidden;
+            --bg-cream: #FFF9EE;
+        }
+
+        .scholarship-banner {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-dark-teal);
+        }
+
+        .content-left {
+            max-width: 600px;
+        }
+
+        .scholarship-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            font-family: var(--font-main);
+        }
+
+        .details-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .tick-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-button {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-main);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 39, 38, 0.15);
+            background-color: #003d3b;
+        }
+
+        .graphics-right {
+            text-align: center;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .trophy-img {
+            width: 220px;
+            display: block;
+            margin: 0 auto -15px auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+
+        .ticket-badge {
+            background: var(--color-white);
+            border: 2px dashed #E5E7E9;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            max-width: 260px;
+            position: relative;
+        }
+
+        .ticket-badge::before, .ticket-badge::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background-color: var(--bg-cream);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket-badge::before { left: -10px; border-right: 2px dashed #E5E7E9; }
+        .ticket-badge::after { right: -10px; border-left: 2px dashed #E5E7E9; }
+
+        .ticket-text {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 0;
+            color: var(--color-dark-teal);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .scholarship-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+                padding: 60px 20px;
+            }
+            .details-row {
+                justify-content: center;
+            }
+            .scholarship-title {
+                font-size: 2rem;
+            }
+            .graphics-right {
+                padding-right: 0;
+            }
+        }
+
+        /* Responsive adjustments for hero (original) */
         @media (max-width: 992px) {
             .content-card {
                 padding: 2.5rem 1.5rem; 
@@ -430,14 +785,7 @@
                 background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%);
             }
             .hero-flex { flex-direction: column-reverse; gap: 1.5rem; }
-            .hero-right { 
-                flex: none; 
-                width: 100%; 
-                justify-content: center;
-                /* Keep improved mask on mobile too */
-                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-                mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-            }
+            .hero-right { flex: none; width: 100%; justify-content: center; }
             .hero-left { flex: none; width: 100%; }
             .hero-heading { font-size: 2.2rem; line-height: 1.2; }
             .hero-paragraph { font-size: 1rem; margin: 0 auto 1.5rem auto; max-width: 100%; }
@@ -507,6 +855,7 @@
                         <div class="icon-box"><i data-lucide="users"></i></div>
                         <div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div>
                     </div>
+                    <!-- Duplicates for marquee -->
                     <div class="feature-card" style="--theme-color: #6366f1;"><div class="icon-box"><i data-lucide="zap"></i></div><div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div></div>
                     <div class="feature-card" style="--theme-color: #ec4899;"><div class="icon-box"><i data-lucide="shield-check"></i></div><div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div></div>
                     <div class="feature-card" style="--theme-color: #f59e0b;"><div class="icon-box"><i data-lucide="layers"></i></div><div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div></div>
@@ -528,7 +877,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: SKILLS CAROUSEL (with touch swipe support) -->
+    <!-- SECTION 3: SKILLS CAROUSEL -->
     <section class="skills-section">
         <div class="skills-intro">
             <h2>Learn <span>essential</span> career and <span>life</span> skills</h2>
@@ -552,118 +901,564 @@
         </div>
     </section>
 
-    <!-- Combined Script: Lucide icons + Carousel logic + Touch swipe -->
+    <!-- SECTION 4: COURSES UI (AI & Python) -->
+    <section class="courses-section">
+        <div class="container-lg">
+            
+            <div class="section-header-left">
+                <h2 class="headline">Explore Top Courses</h2>
+                <p class="subheadline">Master the most in-demand skills with our structured learning paths designed for beginners and pros alike.</p>
+            </div>
+
+            <!-- AI Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="cpu" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Artificial Intelligence (AI)
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-purple">Machine Learning</div>
+                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=800&auto=format&fit=crop" alt="Machine Learning">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Intro to Machine Learning</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 16 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 30m</div>
+                            </div>
+
+                            <p class="course-info">Understand core algorithms, predictive modeling, and real-world ML applications.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-dark">Deep Learning</div>
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Neural Networks">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Deep Learning & Neural Nets</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 22 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 15m</div>
+                            </div>
+
+                            <p class="course-info">Build powerful neural networks using TensorFlow and PyTorch frameworks.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Generative AI</div>
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="Generative AI">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Generative AI Models</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 14 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 45m</div>
+                            </div>
+
+                            <p class="course-info">Explore LLMs, prompt engineering, and the architecture behind ChatGPT.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Data Science</div>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Computer Vision">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Computer Vision basics</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 00m</div>
+                            </div>
+
+                            <p class="course-info">Learn image processing, object detection, and OpenCV implementation.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Python Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="code" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Python
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-green">Beginner</div>
+                            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop" alt="Python Code">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Python for Beginners</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 20 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 10h 30m</div>
+                            </div>
+
+                            <p class="course-info">Start your programming journey with Python syntax, loops, and functions.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Backend</div>
+                            <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop" alt="Django Web">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Django Web Development</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 24 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 14h 15m</div>
+                            </div>
+
+                            <p class="course-info">Build secure, scalable, and robust backend web applications using Django.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Data Analysis</div>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Data Analysis">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Data Analysis with Pandas</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 45m</div>
+                            </div>
+
+                            <p class="course-info">Master data manipulation, cleaning, and visualization techniques in Python.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-dark">Automation</div>
+                            <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800&auto=format&fit=crop" alt="Automation script">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Python Automation</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 12 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 6h 00m</div>
+                            </div>
+
+                            <p class="course-info">Automate the boring stuff: write scripts for web scraping, file management, and more.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: SCHOLARSHIP BANNER -->
+    <div class="scholarship-outer-wrapper">
+        <div class="scholarship-banner">
+            <div class="content-left">
+                <h2 class="scholarship-title">Take a test for free and win up to 50% scholarship</h2>
+                
+                <div class="details-row">
+                    <div class="detail-item">
+                        <img src="https://static.uacdn.net/production/_next/static/images/dst/tick.svg" class="tick-icon" alt="tick">
+                        Just 15 minutes
+                    </div>
+                    <div class="detail-item">
+                        <img src="https://static.uacdn.net/production/_next/static/images/dst/tick.svg" class="tick-icon" alt="tick">
+                        15 quick questions
+                    </div>
+                </div>
+
+                <a href="#" class="cta-button">Attempt test now</a>
+            </div>
+
+            <div class="graphics-right">
+                <img src="https://static.uacdn.net/production/_next/static/images/dst/trophy-v2.svg" class="trophy-img" alt="Scholarship Trophy">
+                
+                <div class="ticket-badge">
+                    <p class="ticket-text">Scholarships worth up to 50% subscription price to be won</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 6: MORE COURSES UI (Full-Stack & Cloud) -->
+    <section class="courses-section">
+        <div class="container-lg">
+            
+            <!-- Full-Stack Web Development Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="layout" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Full-Stack Web Development
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Frontend</div>
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="React Development">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Modern React.js</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 20 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 10h 30m</div>
+                            </div>
+
+                            <p class="course-info">Build highly interactive, component-driven user interfaces using hooks and state management.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-green">Backend</div>
+                            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=800&auto=format&fit=crop" alt="Node.js Development">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Node.js & Express API</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 15m</div>
+                            </div>
+
+                            <p class="course-info">Create fast, scalable server-side applications and RESTful APIs using JavaScript.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Design</div>
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop" alt="UI/UX Design">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">UI/UX for Developers</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 12 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 5h 45m</div>
+                            </div>
+
+                            <p class="course-info">Learn design fundamentals, layout principles, and Figma basics to build better products.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-purple">Full-Stack</div>
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Next.js Development">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Next.js Architecture</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 24 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 00m</div>
+                            </div>
+
+                            <p class="course-info">Master server-side rendering, static site generation, and full-stack deployment.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Cloud Computing & DevOps Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="cloud" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Cloud Computing & DevOps
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Cloud</div>
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" alt="AWS Cloud Server">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">AWS Solutions Architect</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 30 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 15h 00m</div>
+                            </div>
+
+                            <p class="course-info">Learn core AWS services, architecture best practices, and cloud deployment.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-dark">Containers</div>
+                            <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=800&auto=format&fit=crop" alt="Docker Containers">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Docker & Kubernetes</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 22 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 11h 30m</div>
+                            </div>
+
+                            <p class="course-info">Containerize applications and manage large-scale deployments effortlessly.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Automation</div>
+                            <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&auto=format&fit=crop" alt="CI/CD Workflow">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">CI/CD Pipelines</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 15 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 45m</div>
+                            </div>
+
+                            <p class="course-info">Implement continuous integration and deployment using GitHub Actions and Jenkins.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-green">Security</div>
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" alt="Cybersecurity Shield">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Cloud Security Basics</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 16 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 15m</div>
+                            </div>
+
+                            <p class="course-info">Secure your infrastructure, manage identity access, and monitor threats.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Combined Script: Lucide icons + Carousel logic + Courses interactivity -->
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons (replaces all [data-lucide])
+            lucide.createIcons();
 
-        // ----- Skills Carousel Logic with Touch Support -----
-        (function() {
-            const wrapper = document.getElementById('cardWrapper');
-            const dotsContainer = document.getElementById('dotContainer');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const cards = document.querySelectorAll('.skill-card');
-            let currentIndex = 0;
+            // ----- Skills Carousel Logic (with touch) -----
+            (function() {
+                const wrapper = document.getElementById('cardWrapper');
+                const dotsContainer = document.getElementById('dotContainer');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const cards = document.querySelectorAll('.skill-card');
+                let currentIndex = 0;
 
-            let touchStartX = 0;
-            let touchEndX = 0;
-            const minSwipeDistance = 50;
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const minSwipeDistance = 50;
 
-            function getVisibleCount() {
-                if (window.innerWidth <= 600) return 1;
-                if (window.innerWidth <= 1100) return 2;
-                return 3;
-            }
-
-            function createDots() {
-                dotsContainer.innerHTML = '';
-                const visibleCards = getVisibleCount();
-                const maxScrollPositions = cards.length - visibleCards + 1;
-
-                for (let i = 0; i < maxScrollPositions; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('dot');
-                    if (i === currentIndex) dot.classList.add('active');
-                    dot.addEventListener('click', () => goToSlide(i));
-                    dotsContainer.appendChild(dot);
+                function getVisibleCount() {
+                    if (window.innerWidth <= 600) return 1;
+                    if (window.innerWidth <= 1100) return 2;
+                    return 3;
                 }
-            }
 
-            function updateCarousel() {
-                const visibleCards = getVisibleCount();
-                const maxIndex = cards.length - visibleCards;
-                
-                if (currentIndex > maxIndex) currentIndex = maxIndex;
+                function createDots() {
+                    dotsContainer.innerHTML = '';
+                    const visibleCards = getVisibleCount();
+                    const maxScrollPositions = cards.length - visibleCards + 1;
 
-                const cardWidth = cards[0].getBoundingClientRect().width;
-                const gap = parseFloat(getComputedStyle(wrapper).gap) || 24;
-                const moveAmount = currentIndex * (cardWidth + gap);
+                    for (let i = 0; i < maxScrollPositions; i++) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        if (i === currentIndex) dot.classList.add('active');
+                        dot.addEventListener('click', () => goToSlide(i));
+                        dotsContainer.appendChild(dot);
+                    }
+                }
 
-                wrapper.style.transform = `translateX(-${moveAmount}px)`;
-                
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= maxIndex;
+                function updateCarousel() {
+                    const visibleCards = getVisibleCount();
+                    const maxIndex = cards.length - visibleCards;
+                    
+                    if (currentIndex > maxIndex) currentIndex = maxIndex;
 
-                const dots = document.querySelectorAll('.dot');
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentIndex);
-                });
-            }
+                    const cardWidth = cards[0].getBoundingClientRect().width;
+                    const gap = parseFloat(getComputedStyle(wrapper).gap) || 24;
+                    const moveAmount = currentIndex * (cardWidth + gap);
 
-            function goToSlide(i) {
-                currentIndex = i;
-                updateCarousel();
-            }
+                    wrapper.style.transform = `translateX(-${moveAmount}px)`;
+                    
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex >= maxIndex;
 
-            wrapper.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
+                    const dots = document.querySelectorAll('.dot');
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
 
-            wrapper.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
+                function goToSlide(i) {
+                    currentIndex = i;
+                    updateCarousel();
+                }
 
-            function handleSwipe() {
-                const deltaX = touchEndX - touchStartX;
-                if (Math.abs(deltaX) < minSwipeDistance) return;
+                // Touch events
+                wrapper.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
 
-                const visibleCards = getVisibleCount();
-                const maxIndex = cards.length - visibleCards;
+                wrapper.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const deltaX = touchEndX - touchStartX;
+                    if (Math.abs(deltaX) < minSwipeDistance) return;
 
-                if (deltaX > 0) {
-                    if (currentIndex > 0) {
+                    const visibleCards = getVisibleCount();
+                    const maxIndex = cards.length - visibleCards;
+
+                    if (deltaX > 0 && currentIndex > 0) {
                         currentIndex--;
                         updateCarousel();
-                    }
-                } else {
-                    if (currentIndex < maxIndex) {
+                    } else if (deltaX < 0 && currentIndex < maxIndex) {
                         currentIndex++;
                         updateCarousel();
                     }
-                }
-            }
+                }, { passive: true });
 
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) currentIndex--;
-                updateCarousel();
-            });
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) currentIndex--;
+                    updateCarousel();
+                });
 
-            nextBtn.addEventListener('click', () => { 
-                const maxIndex = cards.length - getVisibleCount();
-                if (currentIndex < maxIndex) currentIndex++; 
-                updateCarousel(); 
-            });
+                nextBtn.addEventListener('click', () => { 
+                    const maxIndex = cards.length - getVisibleCount();
+                    if (currentIndex < maxIndex) currentIndex++; 
+                    updateCarousel(); 
+                });
 
-            window.addEventListener('resize', () => {
+                window.addEventListener('resize', () => {
+                    createDots();
+                    updateCarousel();
+                });
+
                 createDots();
                 updateCarousel();
+            })();
+
+            // ----- Courses Section Interactivity (for all courses) -----
+            const courseCards = document.querySelectorAll('.course-card-new');
+            courseCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const courseName = this.querySelector('.course-name').textContent;
+                    alert(`Navigating to details page for: ${courseName}`);
+                });
             });
 
-            createDots();
-            updateCarousel();
-        })();
+            const viewBtns = document.querySelectorAll('.btn-soft');
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const courseName = this.closest('.course-card-new').querySelector('.course-name').textContent;
+                    alert(`Button clicked! Navigating to: ${courseName}`);
+                });
+            });
+        });
     </script>
 </body>
 </html>
