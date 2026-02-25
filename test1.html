@@ -34,7 +34,7 @@
             --font-sm: 0.875rem;
             --font-base: 1rem;
             --font-lg: 1.125rem;
-            --font-xl: 1.25rem;
+            --font-xl: 1.5rem;
             --font-3xl: 1.875rem;
             --font-4xl: 2.25rem;
         }
@@ -59,7 +59,7 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-            overflow-x: hidden; /* Prevent horizontal scroll on body */
+            overflow-x: hidden;
         }
 
         .container-lg {
@@ -92,6 +92,28 @@
             line-height: 1.6;
             font-family: var(--font-heading);
             font-weight: 400;
+        }
+
+        /* --- Category Sections --- */
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-heading {
+            font-family: var(--font-heading);
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary-accent);
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* --- Grid Layout --- */
@@ -211,8 +233,6 @@
             box-shadow: 0 8px 16px rgba(47, 191, 113, 0.25);
         }
 
-        .mobile-link-arrow { display: none; }
-
         .meta-row {
             display: flex; gap: 12px;
             font-size: var(--font-xs); font-weight: 600; color: var(--text-light);
@@ -221,10 +241,12 @@
         
         .meta-item { display: flex; align-items: center; gap: 4px; }
 
+        /* Tag Colors */
         .tag-orange { color: #ea580c; background-color: #fff7ed; }
         .tag-blue { color: #0284c7; background-color: #f0f9ff; }
         .tag-purple { color: #7c3aed; background-color: #f5f3ff; }
         .tag-dark { color: #334155; background-color: #f1f5f9; }
+        .tag-green { color: #16a34a; background-color: #f0fdf4; }
 
         /* =========================================
            RESPONSIVE DESIGN
@@ -238,33 +260,34 @@
         }
 
         @media (max-width: 600px) {
-            .courses-section { padding: 40px 0; }
+            .courses-section { padding: 50px 0; }
             .headline { font-size: var(--font-3xl); }
-            .subheadline { font-size: var(--font-base); padding: 0 10px; }
-            .section-header-left { text-align: left; padding: 0 10px; margin-bottom: 30px; }
+            .subheadline { font-size: var(--font-base); }
+            .section-header-left { text-align: left; margin-bottom: 40px; }
             
+            .category-section { margin-bottom: 40px; }
+            .category-heading { font-size: var(--font-lg); margin-bottom: 16px; }
+
             /* Horizontal Slider for Mobile */
             .courses-grid { 
                 display: flex; 
                 overflow-x: auto; 
                 gap: 16px; 
-                /* Negative margin to allow cards to slide edge-to-edge of screen */
                 margin: 0 -24px; 
-                /* Match padding to container so the first card lines up */
                 padding: 0 24px 20px 24px; 
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Firefox */
+                scrollbar-width: none;
             }
             
             .courses-grid::-webkit-scrollbar {
-                display: none; /* Chrome/Safari */
+                display: none;
             }
 
             /* Fixed width cards for sliding */
             .course-card-new { 
                 flex: 0 0 280px; 
-                scroll-snap-align: center; /* Snaps cards neatly into view */
+                scroll-snap-align: center;
             }
         }
     </style>
@@ -279,93 +302,196 @@
                 <p class="subheadline">Master the most in-demand skills with our structured learning paths designed for beginners and pros alike.</p>
             </div>
 
-            <div class="courses-grid">
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="cpu" style="width: 24px; color: var(--primary-accent);"></i>
+                    Artificial Intelligence (AI)
+                </h3>
                 
-                <div class="course-card-new">
-                    <div class="card-img-container">
-                        <div class="card-badge tag-blue">Frontend</div>
-                        <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=800&auto=format&fit=crop" alt="Web Dev">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="course-name">HTML & CSS Master</h3>
-                        
-                        <div class="meta-row">
-                            <div class="meta-item"><i data-lucide="book" width="14"></i> 12 Lessons</div>
-                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 6h 30m</div>
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-purple">Machine Learning</div>
+                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=800&auto=format&fit=crop" alt="Machine Learning">
                         </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Intro to Machine Learning</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 16 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 30m</div>
+                            </div>
 
-                        <p class="course-info">Build responsive and modern web interfaces from scratch using latest standards.</p>
-                        
-                        <div class="card-footer">
-                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            <p class="course-info">Understand core algorithms, predictive modeling, and real-world ML applications.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-dark">Deep Learning</div>
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Neural Networks">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Deep Learning & Neural Nets</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 22 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 15m</div>
+                            </div>
+
+                            <p class="course-info">Build powerful neural networks using TensorFlow and PyTorch frameworks.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Generative AI</div>
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="Generative AI">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Generative AI Models</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 14 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 45m</div>
+                            </div>
+
+                            <p class="course-info">Explore LLMs, prompt engineering, and the architecture behind ChatGPT.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Data Science</div>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Computer Vision">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Computer Vision basics</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 00m</div>
+                            </div>
+
+                            <p class="course-info">Learn image processing, object detection, and OpenCV implementation.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-                <div class="course-card-new">
-                    <div class="card-img-container">
-                        <div class="card-badge tag-orange">Backend</div>
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" alt="Java">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="course-name">Java Data Structures</h3>
-                        
-                        <div class="meta-row">
-                            <div class="meta-item"><i data-lucide="book" width="14"></i> 24 Lessons</div>
-                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 15m</div>
-                        </div>
-
-                        <p class="course-info">Master DSA and prepare for technical interviews with optimized code.</p>
-                        
-                        <div class="card-footer">
-                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card-new">
-                    <div class="card-img-container">
-                        <div class="card-badge tag-dark">System</div>
-                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" alt="C++">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="course-name">C++ System Design</h3>
-                        
-                        <div class="meta-row">
-                            <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
-                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 45m</div>
-                        </div>
-
-                        <p class="course-info">Learn memory management, performance, and building scalable systems.</p>
-                        
-                        <div class="card-footer">
-                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card-new">
-                    <div class="card-img-container">
-                        <div class="card-badge tag-purple">Data</div>
-                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop" alt="SQL">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="course-name">SQL & Databases</h3>
-                        
-                        <div class="meta-row">
-                            <div class="meta-item"><i data-lucide="book" width="14"></i> 15 Lessons</div>
-                            <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 00m</div>
-                        </div>
-
-                        <p class="course-info">Design schemas and query large datasets efficiently for production apps.</p>
-                        
-                        <div class="card-footer">
-                            <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="code" style="width: 24px; color: var(--primary-accent);"></i>
+                    Python
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-green">Beginner</div>
+                            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop" alt="Python Code">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Python for Beginners</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 20 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 10h 30m</div>
+                            </div>
+
+                            <p class="course-info">Start your programming journey with Python syntax, loops, and functions.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-orange">Backend</div>
+                            <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop" alt="Django Web">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Django Web Development</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 24 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 14h 15m</div>
+                            </div>
+
+                            <p class="course-info">Build secure, scalable, and robust backend web applications using Django.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-blue">Data Analysis</div>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Data Analysis">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Data Analysis with Pandas</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 45m</div>
+                            </div>
+
+                            <p class="course-info">Master data manipulation, cleaning, and visualization techniques in Python.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card-new">
+                        <div class="card-img-container">
+                            <div class="card-badge tag-dark">Automation</div>
+                            <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800&auto=format&fit=crop" alt="Automation script">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="course-name">Python Automation</h3>
+                            
+                            <div class="meta-row">
+                                <div class="meta-item"><i data-lucide="book" width="14"></i> 12 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 6h 00m</div>
+                            </div>
+
+                            <p class="course-info">Automate the boring stuff: write scripts for web scraping, file management, and more.</p>
+                            
+                            <div class="card-footer">
+                                <button class="btn-soft">View Course <i data-lucide="arrow-right" width="16"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
 
