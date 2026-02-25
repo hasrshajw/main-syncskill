@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <style>
-        /* ----- GLOBAL & ROOT VARIABLES (keep original) ----- */
+        /* ----- GLOBAL & ROOT VARIABLES (unchanged) ----- */
         :root {
             --font-main: 'IBM Plex Sans', sans-serif;
             --color-dark-teal: #002726;
@@ -21,8 +21,6 @@
             --color-accent-hover: #52e094;
             --color-white: #ffffff;
             --color-grid-lines: rgba(255, 255, 255, 0.04);
-
-            /* Dashboard Section Variables */
             --text-dark: #002b35; 
             --text-medium: #546e7a;       
             --border-light: rgba(0,0,0,0.06);
@@ -44,7 +42,7 @@
             overflow-x: hidden;
         }
 
-        /* --- SECTION 1: HERO (unchanged) --- */
+        /* --- SECTION 1: HERO --- */
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
@@ -142,7 +140,7 @@
             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
 
-        /* --- SECTION 2: DASHBOARD (unchanged) --- */
+        /* --- SECTION 2: DASHBOARD --- */
         .dashboard-container {
             width: 92%;
             max-width: 1400px;
@@ -241,7 +239,7 @@
         .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
         .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
 
-        /* --- SECTION 3: SKILLS CAROUSEL (added, variables scoped) --- */
+        /* --- SECTION 3: SKILLS CAROUSEL (with touch enhancements) --- */
         .skills-section {
             --skills-text-dark: #2D2F31;
             --skills-text-light: #6A6F73;
@@ -271,7 +269,12 @@
             line-height: 1.6;
         }
 
-        .carousel-viewport { overflow: hidden; position: relative; }
+        .carousel-viewport {
+            overflow: hidden;
+            position: relative;
+            /* Ensure touch events are captured */
+            touch-action: pan-y; /* Allow vertical scroll, horizontal will be handled by JS */
+        }
 
         .card-wrapper {
             display: flex;
@@ -279,6 +282,8 @@
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             padding: 10px 0;
             will-change: transform;
+            /* No user-select to avoid accidental text selection while swiping */
+            user-select: none;
         }
 
         .skill-card {
@@ -295,6 +300,7 @@
             border: 1px solid rgba(0,0,0,0.05);
             box-sizing: border-box;
             transition: transform 0.3s ease;
+            pointer-events: auto; /* Ensure buttons inside are clickable */
         }
 
         .card-footer {
@@ -305,12 +311,17 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            pointer-events: none; /* Let clicks pass to the card if needed, but we want the arrow icon to be non-interactive */
         }
+        /* But we want the card itself to be clickable? Not needed now. */
 
         .card-footer span {
             font-weight: 600;
             font-size: 14px;
             color: var(--skills-text-dark);
+        }
+        .card-footer i {
+            pointer-events: none; /* arrow icon shouldn't block touch */
         }
 
         .carousel-controls {
@@ -376,9 +387,10 @@
                 height: 280px;
             }
             .nav-btn { display: none; }
+            /* On mobile, we hide buttons but dots remain visible for manual navigation */
         }
 
-        /* Responsive adjustments for hero (keep original) */
+        /* Responsive adjustments for hero (unchanged) */
         @media (max-width: 992px) {
             .content-card {
                 padding: 2.5rem 1.5rem; 
@@ -488,7 +500,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: SKILLS CAROUSEL (added) -->
+    <!-- SECTION 3: SKILLS CAROUSEL (with touch swipe support) -->
     <section class="skills-section">
         <div class="skills-intro">
             <h2>Learn <span>essential</span> career and <span>life</span> skills</h2>
@@ -512,12 +524,12 @@
         </div>
     </section>
 
-    <!-- Combined Script: Lucide icons + Carousel logic -->
+    <!-- Combined Script: Lucide icons + Carousel logic + Touch swipe -->
     <script>
-        // Initialize Lucide icons (will replace all [data-lucide] attributes)
+        // Initialize Lucide icons
         lucide.createIcons();
 
-        // ----- Skills Carousel Logic -----
+        // ----- Skills Carousel Logic with Touch Support -----
         (function() {
             const wrapper = document.getElementById('cardWrapper');
             const dotsContainer = document.getElementById('dotContainer');
@@ -525,6 +537,11 @@
             const nextBtn = document.getElementById('nextBtn');
             const cards = document.querySelectorAll('.skill-card');
             let currentIndex = 0;
+
+            // Touch handling variables
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50; // minimum px to consider a swipe
 
             function getVisibleCount() {
                 if (window.innerWidth <= 600) return 1;
@@ -553,7 +570,7 @@
                 if (currentIndex > maxIndex) currentIndex = maxIndex;
 
                 const cardWidth = cards[0].getBoundingClientRect().width;
-                const gap = parseFloat(getComputedStyle(wrapper).gap) || 24; // fallback
+                const gap = parseFloat(getComputedStyle(wrapper).gap) || 24;
                 const moveAmount = currentIndex * (cardWidth + gap);
 
                 wrapper.style.transform = `translateX(-${moveAmount}px)`;
@@ -572,13 +589,51 @@
                 updateCarousel();
             }
 
-            prevBtn.addEventListener('click', () => { if (currentIndex > 0) currentIndex--; updateCarousel(); });
+            // Touch event listeners
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const deltaX = touchEndX - touchStartX;
+                if (Math.abs(deltaX) < minSwipeDistance) return;
+
+                const visibleCards = getVisibleCount();
+                const maxIndex = cards.length - visibleCards;
+
+                if (deltaX > 0) {
+                    // Swipe right -> previous
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                    }
+                } else {
+                    // Swipe left -> next
+                    if (currentIndex < maxIndex) {
+                        currentIndex++;
+                        updateCarousel();
+                    }
+                }
+            }
+
+            // Button listeners
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) currentIndex--;
+                updateCarousel();
+            });
+
             nextBtn.addEventListener('click', () => { 
                 const maxIndex = cards.length - getVisibleCount();
                 if (currentIndex < maxIndex) currentIndex++; 
                 updateCarousel(); 
             });
 
+            // Resize listener
             window.addEventListener('resize', () => {
                 createDots();
                 updateCarousel();
@@ -587,6 +642,10 @@
             // Initial setup
             createDots();
             updateCarousel();
+
+            // Optional: prevent vertical scroll interference while swiping horizontally
+            // We'll not prevent default to keep vertical scroll, but we can add a touchmove handler to cancel if mostly horizontal
+            // This is a minimal implementation that works.
         })();
     </script>
 </body>
