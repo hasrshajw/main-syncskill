@@ -87,12 +87,11 @@
     }
 
     .logo {
-      width: 100px;
-      height: 40px;
-      color: transparent;
+      width: 120px;
+      height: auto;
+      display: block;
     }
 
-    /* Desktop navigation links */
     .nav-links {
       display: none;
       align-items: center;
@@ -106,10 +105,7 @@
     }
 
     .nav-link {
-      padding-left: calc(var(--spacing) * 4);
-      padding-right: calc(var(--spacing) * 4);
-      padding-top: calc(var(--spacing) * 2);
-      padding-bottom: calc(var(--spacing) * 2);
+      padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
       font-size: var(--text-base);
       line-height: var(--text-base--line-height);
       font-weight: var(--font-weight-medium);
@@ -134,7 +130,6 @@
       gap: calc(var(--spacing) * 4);
     }
 
-    /* Mobile menu button */
     .menu-button {
       display: flex;
       padding: calc(var(--spacing) * 1.5);
@@ -151,7 +146,6 @@
       }
     }
 
-    /* Desktop auth buttons */
     .auth-buttons {
       display: none;
       align-items: center;
@@ -165,10 +159,7 @@
     }
 
     .auth-button {
-      padding-left: calc(var(--spacing) * 5);
-      padding-right: calc(var(--spacing) * 5);
-      padding-top: calc(var(--spacing) * 2);
-      padding-bottom: calc(var(--spacing) * 2);
+      padding: calc(var(--spacing) * 2) calc(var(--spacing) * 5);
       font-size: var(--text-base);
       line-height: var(--text-base--line-height);
       font-weight: var(--font-weight-medium);
@@ -177,9 +168,7 @@
       color: var(--color-dark-teal);
       text-decoration: none;
       background-color: transparent;
-      transition-property: color, background-color;
-      transition-duration: var(--default-transition-duration);
-      transition-timing-function: var(--default-transition-timing-function);
+      transition: all var(--default-transition-duration);
     }
 
     .auth-button.submit {
@@ -193,12 +182,8 @@
         color: var(--color-white);
         background-color: var(--color-teal-hover);
       }
-      .auth-button.submit:hover {
-        background-color: var(--color-teal-hover);
-      }
     }
 
-    /* Divider */
     .divider {
       height: 1px;
       background-color: var(--color-gray-200);
@@ -282,7 +267,6 @@
       padding: 12px 0;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      text-decoration: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -331,10 +315,10 @@
       <nav class="nav">
         <div class="nav-left">
           <a href="/">
-            <img class="logo" src="/assets/ihtnas-nav.png" alt="IHTNAS Journal Logo" width="200" height="50" loading="eager">
+            <img class="logo" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsmainlogo.svg" alt="Logo" loading="eager">
           </a>
           <div class="nav-links">
-            <a class="nav-link" href="/archive">Archive</a>
+            <a class="nav-link" href="/upskill">Upskill your Team</a>
             <a class="nav-link" href="/about-us">About</a>
           </div>
         </div>
@@ -345,8 +329,8 @@
             </svg>
           </button>
           <div class="auth-buttons">
-            <a class="auth-button submit" href="/submit">Submit Paper</a>
-            <a class="auth-button" href="/apply">Join as Reviewer</a>
+            <a class="auth-button submit" href="/login">Login</a>
+            <a class="auth-button" href="/apply">Apply as Mentor</a>
           </div>
         </div>
       </nav>
@@ -359,10 +343,10 @@
         </div>
         <div class="mobile-menu-content">
           <div class="mobile-menu-section">
-            <a href="/archive" style="text-decoration: none;">
+            <a href="/upskill" style="text-decoration: none;">
               <div class="mobile-menu-group">
                 <h3 class="mobile-menu-header">
-                  <span>Archive</span>
+                  <span>Upskill your Team</span>
                 </h3>
               </div>
             </a>
@@ -384,8 +368,8 @@
         </div>
         <div class="mobile-menu-auth">
           <div class="mobile-menu-auth-buttons">
-            <a href="/submit" class="mobile-menu-auth-button submit">Submit Paper</a>
-            <a href="/apply" class="mobile-menu-auth-button join">Join as Reviewer</a>
+            <a href="/login" class="mobile-menu-auth-button submit">Login</a>
+            <a href="/apply" class="mobile-menu-auth-button join">Apply as Mentor</a>
           </div>
         </div>
       </div>
@@ -395,8 +379,8 @@
   </header>
 
   <main style="padding: 2rem; text-align: center;">
-    <h1>Page Content Goes Here</h1>
-    <p>The specific policy and resource sections have been removed from the mobile menu.</p>
+    <h1>Welcome to the Platform</h1>
+    <p>The navigation and logo have been updated according to your requirements.</p>
   </main>
 
   <script>
