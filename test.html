@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SyncSkill – refined header (buttons match, hover cleanup)</title>
+  <title>SyncSkill – Login highlighted, button height adjusted</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,8 +22,6 @@
       --color-teal-hover: #004D4B;
       --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
       --font-weight-medium: 500;
-      --radius-full: 9999px;
-      --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
       --header-height: 72px;
     }
 
@@ -88,13 +86,13 @@
       font-weight: var(--font-weight-medium);
       color: var(--color-dark-teal);
       text-decoration: none;
-      border-radius: 0; /* no oval shape */
+      border-radius: 0;
       transition: color 0.2s ease;
       background: transparent;
     }
 
     .nav-link:hover {
-      color: var(--color-teal-hover); /* only text color changes */
+      color: var(--color-teal-hover);
       background: transparent;
     }
 
@@ -103,7 +101,7 @@
       align-items: center;
     }
 
-    /* Auth Buttons (Desktop) — both outline, same style */
+    /* Auth Buttons (Desktop) */
     .auth-buttons {
       display: none;
       gap: 12px;
@@ -113,8 +111,9 @@
       .auth-buttons { display: flex; }
     }
 
+    /* Base button style (outline) */
     .auth-button {
-      padding: 10px 24px;
+      padding: 8px 24px; /* slightly reduced height (was 10px) */
       font-weight: var(--font-weight-medium);
       border-radius: 8px;
       text-decoration: none;
@@ -124,11 +123,23 @@
       background: transparent;
     }
 
-    /* Hover effect for both buttons: fill with teal */
-    .auth-button:hover {
+    /* Filled variant for Login */
+    .auth-button.submit {
       background-color: var(--color-dark-teal);
       color: var(--color-white);
-      border-color: var(--color-dark-teal);
+    }
+
+    /* Hover: Login (filled) becomes darker teal */
+    .auth-button.submit:hover {
+      background-color: var(--color-teal-hover);
+      border-color: var(--color-teal-hover);
+      color: var(--color-white);
+    }
+
+    /* Hover: Apply (outline) fills with teal */
+    .auth-button:not(.submit):hover {
+      background-color: var(--color-dark-teal);
+      color: var(--color-white);
     }
 
     /* Hamburger Button (Mobile) */
@@ -196,7 +207,7 @@
 
     .mobile-auth-button {
       width: 100%;
-      padding: 14px;
+      padding: 12px; /* slightly reduced from 14px */
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
@@ -208,7 +219,17 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .mobile-auth-button:hover {
+    .mobile-auth-button.submit {
+      background-color: var(--color-dark-teal);
+      color: var(--color-white);
+    }
+
+    .mobile-auth-button.submit:hover {
+      background-color: var(--color-teal-hover);
+      border-color: var(--color-teal-hover);
+    }
+
+    .mobile-auth-button:not(.submit):hover {
       background-color: var(--color-dark-teal);
       color: var(--color-white);
     }
@@ -248,9 +269,9 @@
           </svg>
         </button>
 
-        <!-- Desktop buttons: both outline, same style -->
+        <!-- Desktop buttons: Login filled, Apply outline -->
         <div class="auth-buttons">
-          <a class="auth-button" href="/login">Login</a>
+          <a class="auth-button submit" href="/login">Login</a>
           <a class="auth-button" href="/apply">Apply as Mentor</a>
         </div>
       </div>
@@ -262,8 +283,7 @@
     <a href="/upskill" class="mobile-nav-link">Upskill your Team</a>
     <a href="/about-us" class="mobile-nav-link">About</a>
     <div class="mobile-auth-stack">
-      <!-- both outline on mobile too, hover works (though tap is primary) -->
-      <a href="/login" class="mobile-auth-button">Login</a>
+      <a href="/login" class="mobile-auth-button submit">Login</a>
       <a href="/apply" class="mobile-auth-button">Apply as Mentor</a>
     </div>
   </div>
@@ -271,10 +291,11 @@
   <div id="menuOverlay"></div>
 
   <main style="padding: 4rem 2rem; text-align: center;">
-    <h1>Main content — refined header</h1>
-    <p>✅ Both buttons now match (outline) and fill on hover.</p>
-    <p>✅ Nav links only change text color on hover — no background pill.</p>
-    <p>✅ Blue tap highlight removed from all interactive elements.</p>
+    <h1>Login highlighted, button height slightly reduced</h1>
+    <p>✅ Login is filled teal, Apply as Mentor is outline – both have hover effects.</p>
+    <p>✅ Button height reduced (vertical padding 8px on desktop, 12px on mobile).</p>
+    <p>✅ Nav links only change text color on hover, no background.</p>
+    <p>✅ Blue tap highlight removed, hamburger toggles to X.</p>
   </main>
 
   <script>
