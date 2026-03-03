@@ -1,330 +1,1770 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SyncSkill – Login highlighted, button height adjusted</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ----- RESET & VARIABLES ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <!-- ================================================= -->
+    <!-- BASIC SEO -->
+    <!-- ================================================= -->
+    <title>SyncSkill | Become Top 1%</title>
+    <meta name="description" content="Whether it is Product, Growth, Design, Business, Tech or Data, SyncSkill is the place to learn from top experts and become the Top 1%.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://syncskill.in/">
 
-    :root {
-      --spacing: 0.25rem;
-      --color-white: #fff;
-      --color-dark-teal: #012726;
-      --color-teal-hover: #004D4B;
-      --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-      --font-weight-medium: 500;
-      --header-height: 72px;
+    <!-- ================================================= -->
+    <!-- SITE NAME STRUCTURED DATA -->
+    <!-- ================================================= -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "SyncSkill",
+        "alternateName": "SyncSkill Learning Platform",
+        "url": "https://syncskill.in/"
     }
+    </script>
 
-    body {
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      padding-top: var(--header-height);
-      color: var(--color-dark-teal);
+    <!-- ================================================= -->
+    <!-- ORGANIZATION / BRAND SIGNAL -->
+    <!-- ================================================= -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SyncSkill",
+        "url": "https://syncskill.in",
+        "logo": "https://syncskill.in/logo.png"
     }
+    </script>
 
-    /* Remove default tap highlight on mobile for all interactive elements */
-    a, button, .nav-link, .auth-button, .mobile-nav-link, .mobile-auth-button, .menu-button {
-      -webkit-tap-highlight-color: transparent;
-      outline: none;
-    }
+    <!-- ================================================= -->
+    <!-- OPEN GRAPH & TWITTER -->
+    <!-- ================================================= -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SyncSkill | Become Top 1%">
+    <meta property="og:description" content="Learn from top experts and become the Top 1%.">
+    <meta property="og:url" content="https://syncskill.in/">
+    <meta property="og:image" content="https://syncskill.in/seo-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SyncSkill | Become Top 1%">
+    <meta name="twitter:description" content="Skill-focused learning platform designed for future careers.">
+    <meta name="twitter:image" content="https://syncskill.in/seo-cover.jpg">
 
-    /* ----- HEADER ----- */
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: var(--header-height);
-      z-index: 100;
-      background-color: var(--color-white);
-      border-bottom: 1px solid #f1f5f9;
-      display: flex;
-      align-items: center;
-    }
+    <!-- ================================================= -->
+    <!-- FAVICON SETUP -->
+    <!-- ================================================= -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    .header-container {
-      width: 90%;
-      margin: 0 auto;
-      max-width: 1280px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    <!-- ================================================= -->
+    <!-- PERFORMANCE & FONTS -->
+    <!-- ================================================= -->
+    <meta name="theme-color" content="#000000">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- IBM Plex Sans (main) and Plus Jakarta Sans (only for fallback, but we override with IBM) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
+    <style>
+        /* ----- GLOBAL & ROOT VARIABLES (merged with navbar) ----- */
+        :root {
+            /* Existing variables */
+            --font-main: 'IBM Plex Sans', sans-serif;  /* Entire site uses IBM Plex Sans */
+            --color-dark-teal: #002726;
+            --color-accent-green: #33C375;
+            --color-accent-hover: #52e094;
+            --color-white: #ffffff;
+            --color-grid-lines: rgba(255, 255, 255, 0.04);
+            --text-dark: #002b35;
+            --text-medium: #546e7a;
+            --border-light: rgba(0,0,0,0.06);
+            --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --dash-height: 240px;
+            --bg-cream: #fdfaf2;
+            
+            /* Courses section variables */
+            --courses-font-main: 'IBM Plex Sans', sans-serif;
+            --courses-font-heading: 'IBM Plex Sans', sans-serif;
+            --courses-text-dark: #0f172a;
+            --courses-text-medium: #475569;
+            --courses-text-light: #94a3b8;
+            --courses-bg-subtle: #f8fafc;
+            --courses-border-light: #cbd5e1;
+            --courses-primary-accent: #2FBF71;
+            --courses-ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
+            --courses-shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --courses-container-width: 1400px;
+            
+            /* New shadow variables (from premium grid) */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 
-    .logo {
-      width: 140px;
-      height: auto;
-      display: block;
-    }
+            /* Navbar variables */
+            --spacing: 0.25rem;
+            --color-teal-hover: #004D4B;
+            --font-weight-medium: 500;
+            --header-height: 72px;
+        }
 
-    .nav-links {
-      display: none;
-      gap: 8px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    @media (min-width: 768px) {
-      .nav-links { display: flex; }
-    }
+        body {
+            background-color: #fcfcfc;
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            padding-top: var(--header-height); /* For fixed header */
+        }
 
-    .nav-link {
-      padding: 8px 16px;
-      font-weight: var(--font-weight-medium);
-      color: var(--color-dark-teal);
-      text-decoration: none;
-      border-radius: 0;
-      transition: color 0.2s ease;
-      background: transparent;
-    }
+        /* Remove default tap highlight on mobile for all interactive elements */
+        a, button, .nav-link, .auth-button, .mobile-nav-link, .mobile-auth-button, .menu-button {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
 
-    .nav-link:hover {
-      color: var(--color-teal-hover);
-      background: transparent;
-    }
+        /* ----- HEADER (navbar) ----- */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 100;
+            background-color: var(--color-white);
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+        }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-    }
+        .header-container {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 1280px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* Auth Buttons (Desktop) */
-    .auth-buttons {
-      display: none;
-      gap: 12px;
-    }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
 
-    @media (min-width: 768px) {
-      .auth-buttons { display: flex; }
-    }
+        .logo {
+            width: 140px;
+            height: auto;
+            display: block;
+        }
 
-    /* Base button style (outline) */
-    .auth-button {
-      padding: 8px 24px; /* slightly reduced height (was 10px) */
-      font-weight: var(--font-weight-medium);
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-      border: 1px solid var(--color-dark-teal);
-      color: var(--color-dark-teal);
-      background: transparent;
-    }
+        .nav-links {
+            display: none;
+            gap: 8px;
+        }
 
-    /* Filled variant for Login */
-    .auth-button.submit {
-      background-color: var(--color-dark-teal);
-      color: var(--color-white);
-    }
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+        }
 
-    /* Hover: Login (filled) becomes darker teal */
-    .auth-button.submit:hover {
-      background-color: var(--color-teal-hover);
-      border-color: var(--color-teal-hover);
-      color: var(--color-white);
-    }
+        .nav-link {
+            padding: 8px 16px;
+            font-weight: var(--font-weight-medium);
+            color: var(--color-dark-teal);
+            text-decoration: none;
+            border-radius: 0;
+            transition: color 0.2s ease;
+            background: transparent;
+        }
 
-    /* Hover: Apply (outline) fills with teal */
-    .auth-button:not(.submit):hover {
-      background-color: var(--color-dark-teal);
-      color: var(--color-white);
-    }
+        .nav-link:hover {
+            color: var(--color-teal-hover);
+            background: transparent;
+        }
 
-    /* Hamburger Button (Mobile) */
-    .menu-button {
-      display: flex;
-      padding: 8px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      background: #f1f5f9;
-      cursor: pointer;
-      color: var(--color-dark-teal);
-      transition: background 0.1s;
-    }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
 
+        /* Auth Buttons (Desktop) */
+        .auth-buttons {
+            display: none;
+            gap: 12px;
+        }
 
-    @media (min-width: 768px) {
-      .menu-button { display: none; }
-    }
+        @media (min-width: 768px) {
+            .auth-buttons { display: flex; }
+        }
 
-    /* ----- MOBILE MENU (DROPDOWN) ----- */
-    #mobileMenu {
-      position: fixed;
-      top: var(--header-height);
-      left: 0;
-      width: 100%;
-      background: var(--color-white);
-      z-index: 90;
-      transform: translateY(-110%);
-      transition: transform 0.3s ease-in-out;
-      padding: 24px 5%;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+        /* Base button style (outline) */
+        .auth-button {
+            padding: 8px 24px;
+            font-weight: var(--font-weight-medium);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            border: 1px solid var(--color-dark-teal);
+            color: var(--color-dark-teal);
+            background: transparent;
+        }
 
-    #mobileMenu.active {
-      transform: translateY(0);
-    }
+        /* Filled variant for Login */
+        .auth-button.submit {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+        }
 
-    .mobile-nav-link {
-      font-size: 1.1rem;
-      font-weight: 500;
-      text-decoration: none;
-      color: var(--color-dark-teal);
-      padding: 8px 0;
-      transition: color 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
+        /* Hover: Login (filled) becomes darker teal */
+        .auth-button.submit:hover {
+            background-color: var(--color-teal-hover);
+            border-color: var(--color-teal-hover);
+            color: var(--color-white);
+        }
 
-    .mobile-nav-link:hover {
-      color: var(--color-teal-hover);
-      background: transparent;
-    }
+        /* Hover: Apply (outline) fills with teal */
+        .auth-button:not(.submit):hover {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+        }
 
-    .mobile-auth-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #f1f5f9;
-    }
+        /* Hamburger Button (Mobile) */
+        .menu-button {
+            display: flex;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f1f5f9;
+            cursor: pointer;
+            color: var(--color-dark-teal);
+            transition: background 0.1s;
+        }
 
-    .mobile-auth-button {
-      width: 100%;
-      padding: 12px; /* slightly reduced from 14px */
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid var(--color-dark-teal);
-      color: var(--color-dark-teal);
-      background: transparent;
-      transition: background-color 0.2s, color 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
+        @media (min-width: 768px) {
+            .menu-button { display: none; }
+        }
 
-    .mobile-auth-button.submit {
-      background-color: var(--color-dark-teal);
-      color: var(--color-white);
-    }
+        /* ----- MOBILE MENU (DROPDOWN) ----- */
+        #mobileMenu {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            background: var(--color-white);
+            z-index: 90;
+            transform: translateY(-110%);
+            transition: transform 0.3s ease-in-out;
+            padding: 24px 5%;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    .mobile-auth-button.submit:hover {
-      background-color: var(--color-teal-hover);
-      border-color: var(--color-teal-hover);
-    }
+        #mobileMenu.active {
+            transform: translateY(0);
+        }
 
-    .mobile-auth-button:not(.submit):hover {
-      background-color: var(--color-dark-teal);
-      color: var(--color-white);
-    }
+        .mobile-nav-link {
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--color-dark-teal);
+            padding: 8px 0;
+            transition: color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    #menuOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(2px);
-      z-index: 80;
-      display: none;
-    }
+        .mobile-nav-link:hover {
+            color: var(--color-teal-hover);
+            background: transparent;
+        }
 
-    #menuOverlay.active {
-      display: block;
-    }
-  </style>
+        .mobile-auth-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .mobile-auth-button {
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--color-dark-teal);
+            color: var(--color-dark-teal);
+            background: transparent;
+            transition: background-color 0.2s, color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-auth-button.submit {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+        }
+
+        .mobile-auth-button.submit:hover {
+            background-color: var(--color-teal-hover);
+            border-color: var(--color-teal-hover);
+        }
+
+        .mobile-auth-button:not(.submit):hover {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+        }
+
+        #menuOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(2px);
+            z-index: 80;
+            display: none;
+        }
+
+        #menuOverlay.active {
+            display: block;
+        }
+
+        /* --- SECTION 1: HERO (unchanged) --- */
+        .hero-section {
+            width: 100%;
+            padding: 1.2rem 0;
+            margin-bottom: 20px;
+        }
+
+        .content-card {
+            width: 92%;
+            max-width: 1400px;
+            margin: auto;
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            background-color: var(--color-dark-teal);
+            background-image: 
+                linear-gradient(var(--color-grid-lines) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-grid-lines) 1px, transparent 1px),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-size: 80px 80px, 80px 80px, 120px 120px;
+            background-blend-mode: normal, normal, overlay;
+            padding: 3.5rem 4rem;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: -20%; left: -10%;
+            width: 60%; height: 140%;
+            background: radial-gradient(circle, rgba(51, 195, 117, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-left { flex: 1.3; text-align: left; }
+
+        .hero-heading {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--color-white);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+            font-family: var(--font-main);
+        }
+
+        .hero-heading span.top-text { display: block; }
+
+        .hero-paragraph {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.15rem;
+            max-width: 540px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-family: var(--font-main);
+        }
+
+        .explore-button {
+            background-color: var(--color-accent-green);
+            color: var(--color-dark-teal);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 1rem 2.2rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.4s var(--ease-out);
+            text-decoration: none;
+            font-family: var(--font-main);
+        }
+
+        .explore-button:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2);
+        }
+
+        .hero-right { 
+            flex: 0.7; 
+            display: flex; 
+            justify-content: flex-end; 
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        /* --- SECTION 2: DASHBOARD --- */
+        .dashboard-container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 20px auto 40px auto;
+            display: flex;
+            gap: 20px;
+            height: var(--dash-height);
+        }
+
+        .dash-left-main {
+            flex: 2.5;
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 24px 24px;
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 35px 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-header-dash { padding: 0 45px; margin-bottom: 25px; }
+
+        .section-title-dash {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+            font-family: var(--font-main);
+        }
+
+        .section-subtitle-dash {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-weight: 500;
+            font-family: var(--font-main);
+        }
+
+        .marquee-wrapper { display: flex; align-items: center; flex: 1; overflow: hidden; }
+
+        .marquee-row {
+            display: flex;
+            gap: 15px;
+            width: max-content;
+            padding-left: 45px;
+            animation: scrollLeft 35s linear infinite;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 7.5px)); }
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 12px 18px;
+            width: 240px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: transform 0.3s var(--ease-out);
+        }
+
+        .icon-box {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            background-color: color-mix(in srgb, var(--theme-color), transparent 92%);
+            color: var(--theme-color);
+            flex-shrink: 0;
+        }
+        
+        .icon-box svg { width: 20px; height: 20px; stroke-width: 2.5px; }
+        .card-title { font-weight: 700; font-size: 0.85rem; color: var(--text-dark); font-family: var(--font-main); }
+        .card-desc { font-size: 0.7rem; color: var(--text-medium); white-space: nowrap; font-family: var(--font-main); }
+
+        .dash-right-animation {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lottie-container { width: 100%; height: 100%; max-width: 600px; max-height: 600px; }
+
+        .dash-left-main::before, .dash-left-main::after {
+            content: ""; position: absolute; top: 90px; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+        }
+        .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
+        .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
+
+        /* --- SECTION 3: SKILLS CAROUSEL --- */
+        .skills-section {
+            --skills-text-dark: #2D2F31;
+            --skills-text-light: #6A6F73;
+            --skills-card-bg: #F7F9FA;
+            --skills-gap: 24px;
+
+            width: 90%;
+            max-width: 1400px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .skills-intro { text-align: left; }
+        .skills-intro h2 {
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--skills-text-dark);
+            margin-bottom: 16px;
+            font-family: var(--font-main);
+        }
+        .skills-intro h2 span { font-style: italic; font-weight: 400; }
+        .skills-intro p {
+            font-size: 16px;
+            color: var(--skills-text-light);
+            line-height: 1.6;
+            font-family: var(--font-main);
+        }
+
+        .carousel-viewport {
+            overflow: hidden;
+            position: relative;
+            touch-action: pan-y;
+        }
+
+        .card-wrapper {
+            display: flex;
+            gap: var(--skills-gap);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 10px 0;
+            will-change: transform;
+            user-select: none;
+        }
+
+        .skill-card {
+            flex: 0 0 calc((100% - (var(--skills-gap) * 2)) / 3);
+            height: 400px;
+            background-color: var(--skills-card-bg);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .card-footer {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            pointer-events: none;
+        }
+
+        .card-footer span {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--skills-text-dark);
+            font-family: var(--font-main);
+        }
+        .card-footer i { pointer-events: none; }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            border: 1px solid #D1D7DC;
+            background: white;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-dark-teal);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+        .nav-btn:not(:disabled):hover {
+            background: var(--color-dark-teal);
+            color: white;
+        }
+
+        .dots { display: flex; gap: 8px; }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #D1D7DC;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--color-accent-green);
+        }
+
+        @media (max-width: 1100px) {
+            .skills-section { grid-template-columns: 1fr; }
+            .skill-card { flex: 0 0 calc((100% - var(--skills-gap)) / 2); }
+        }
+
+        @media (max-width: 600px) {
+            .skills-section { width: 92%; margin: 30px auto; }
+            .skill-card { flex: 0 0 200px; height: 280px; }
+            .nav-btn { display: none; }
+        }
+
+        /* --- SECTIONS 4 & 6: COURSES UI (REDESIGNED CARDS) --- */
+        .courses-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            font-family: var(--courses-font-main);
+        }
+
+        .courses-section .container-lg {
+            width: 100%;
+            max-width: var(--courses-container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .courses-section .section-header-left {
+            text-align: left;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        
+        .courses-section .headline {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            font-family: var(--courses-font-heading);
+        }
+
+        .courses-section .subheadline {
+            font-size: 1rem;
+            color: var(--courses-text-medium);
+            line-height: 1.6;
+            font-family: var(--courses-font-heading);
+            font-weight: 400;
+        }
+
+        .courses-section .category-section {
+            margin-bottom: 60px;
+        }
+
+        .courses-section .category-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .courses-section .category-heading {
+            font-family: var(--courses-font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            margin-bottom: 24px;
+            border-left: 4px solid var(--courses-primary-accent);
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- REDESIGNED CARD STYLES (based on observed premium UI) --- */
+        .courses-section .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .courses-section .course-card-new {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid var(--courses-border-light);
+            padding: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .courses-section .course-card-new:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(47, 191, 113, 0.2);
+        }
+
+        .courses-section .img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: #f8fafc;
+        }
+
+        .courses-section .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .courses-section .course-card-new:hover .img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .courses-section .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--courses-text-dark);
+            border: 1px solid rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            font-family: var(--font-main);
+        }
+
+        /* Badge color variants */
+        .courses-section .badge.t-blue { color: #2563eb; }
+        .courses-section .badge.t-orange { color: #ea580c; }
+        .courses-section .badge.t-purple { color: #7c3aed; }
+        .courses-section .badge.t-dark { color: #334155; }
+        .courses-section .badge.t-green { color: #16a34a; }
+
+        .courses-section .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .courses-section .content h3 {
+            font-family: var(--font-main);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            color: var(--courses-text-dark);
+        }
+
+        .courses-section .desc {
+            font-size: 0.9rem;
+            color: var(--courses-text-medium);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: var(--font-main);
+        }
+
+        .courses-section .meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--courses-border-light);
+            margin-bottom: 20px;
+        }
+
+        .courses-section .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--courses-text-light);
+            font-family: var(--font-main);
+        }
+
+        .courses-section .action-btn {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 14px;
+            background: #eefcf4;
+            color: #15803d;
+            font-weight: 700;
+            font-family: var(--font-main);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .courses-section .course-card-new:hover .action-btn {
+            background: var(--courses-primary-accent);
+            color: white;
+        }
+
+        /* Responsive for courses section */
+        @media (min-width: 1025px) {
+            .courses-section .container-lg { padding: 0; margin: 0 auto; }
+        }
+
+        @media (max-width: 1024px) {
+            .courses-section { padding: 50px 0; }
+            .courses-section .headline { font-size: 1.875rem; }
+            .courses-section .subheadline { font-size: 1rem; }
+            .courses-section .section-header-left { text-align: left; margin-bottom: 40px; }
+            
+            .courses-section .category-section { margin-bottom: 40px; }
+            .courses-section .category-heading { font-size: 1.125rem; margin-bottom: 16px; }
+
+            .courses-section .courses-grid { 
+                display: flex; 
+                overflow-x: auto; 
+                gap: 16px; 
+                margin: 0 -24px; 
+                padding: 0 24px 20px 24px; 
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .courses-section .courses-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .courses-section .course-card-new { 
+                flex: 0 0 280px; 
+                scroll-snap-align: center;
+                transform: none !important;
+            }
+        }
+
+        /* --- SECTION 5: SCHOLARSHIP BANNER --- */
+        .scholarship-outer-wrapper {
+            width: 100%;
+            background-color: #FFF9EE;
+            margin: 40px 0;
+            overflow: hidden;
+            --bg-cream: #FFF9EE;
+        }
+
+        .scholarship-banner {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-dark-teal);
+        }
+
+        .content-left {
+            max-width: 600px;
+        }
+
+        .scholarship-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            font-family: var(--font-main);
+        }
+
+        .details-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+            font-family: var(--font-main);
+        }
+
+        .tick-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-button {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-main);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 39, 38, 0.15);
+            background-color: #003d3b;
+        }
+
+        .graphics-right {
+            text-align: center;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .trophy-img {
+            width: 220px;
+            display: block;
+            margin: 0 auto -15px auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+
+        .ticket-badge {
+            background: var(--color-white);
+            border: 2px dashed #E5E7E9;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            max-width: 260px;
+            position: relative;
+        }
+
+        .ticket-badge::before, .ticket-badge::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background-color: var(--bg-cream);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket-badge::before { left: -10px; border-right: 2px dashed #E5E7E9; }
+        .ticket-badge::after { right: -10px; border-left: 2px dashed #E5E7E9; }
+
+        .ticket-text {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 0;
+            color: var(--color-dark-teal);
+            font-family: var(--font-main);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .content-card {
+                padding: 2.5rem 1.5rem;
+                text-align: center;
+                background-color: var(--color-dark-teal);
+                background-image: 
+                    linear-gradient(var(--color-grid-lines) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--color-grid-lines) 1px, transparent 1px),
+                    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                background-size: 60px 60px, 60px 60px, 120px 120px;
+                background-blend-mode: normal, normal, overlay;
+            }
+            .content-card::before {
+                top: 0; left: 50%; transform: translateX(-50%);
+                width: 100%; height: 100%;
+                background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%);
+            }
+            .hero-flex { flex-direction: column-reverse; gap: 1.5rem; }
+            .hero-right { flex: none; width: 100%; justify-content: center; }
+            .hero-left { flex: none; width: 100%; }
+            .hero-heading { font-size: 2.2rem; line-height: 1.2; }
+            .hero-paragraph { font-size: 1rem; margin: 0 auto 1.5rem auto; max-width: 100%; }
+            .dashboard-container { height: auto; flex-direction: column; }
+            .dash-left-main, .dash-right-animation { height: 240px; }
+            
+            .scholarship-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+                padding: 60px 20px;
+            }
+            .details-row {
+                justify-content: center;
+            }
+            .scholarship-title {
+                font-size: 2rem;
+            }
+            .graphics-right {
+                padding-right: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="header-container">
-      <div class="nav-left">
-        <a href="/" aria-label="Home">
-          <img class="logo" src="https://syncskill.in/assets/syncskill-logo.svg" alt="SyncSkill Logo">
-        </a>
-        <div class="nav-links">
-          <a class="nav-link" href="/upskill">Upskill your Team</a>
-          <a class="nav-link" href="/about-us">About</a>
+    <!-- ===== NAVBAR (added) ===== -->
+    <header class="header">
+        <div class="header-container">
+            <div class="nav-left">
+                <a href="/" aria-label="Home">
+                    <img class="logo" src="https://syncskill.in/assets/syncskill-logo.svg" alt="SyncSkill Logo">
+                </a>
+                <div class="nav-links">
+                    <a class="nav-link" href="/upskill">Upskill your Team</a>
+                    <a class="nav-link" href="/about-us">About</a>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <button class="menu-button" id="mobileMenuButton" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <!-- Desktop buttons: Login filled, Apply outline -->
+                <div class="auth-buttons">
+                    <a class="auth-button submit" href="/login">Login</a>
+                    <a class="auth-button" href="/apply">Apply as Mentor</a>
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
 
-      <div class="nav-right">
-        <button class="menu-button" id="mobileMenuButton" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-
-        <!-- Desktop buttons: Login filled, Apply outline -->
-        <div class="auth-buttons">
-          <a class="auth-button submit" href="/login">Login</a>
-          <a class="auth-button" href="/apply">Apply as Mentor</a>
+    <!-- mobile drawer -->
+    <div id="mobileMenu">
+        <a href="/upskill" class="mobile-nav-link">Upskill your Team</a>
+        <a href="/about-us" class="mobile-nav-link">About</a>
+        <div class="mobile-auth-stack">
+            <a href="/login" class="mobile-auth-button submit">Login</a>
+            <a href="/apply" class="mobile-auth-button">Apply as Mentor</a>
         </div>
-      </div>
     </div>
-  </header>
 
-  <!-- mobile drawer -->
-  <div id="mobileMenu">
-    <a href="/upskill" class="mobile-nav-link">Upskill your Team</a>
-    <a href="/about-us" class="mobile-nav-link">About</a>
-    <div class="mobile-auth-stack">
-      <a href="/login" class="mobile-auth-button submit">Login</a>
-      <a href="/apply" class="mobile-auth-button">Apply as Mentor</a>
+    <div id="menuOverlay"></div>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero-section">
+        <div class="content-card">
+            <div class="hero-flex">
+                <div class="hero-left">
+                    <h1 class="hero-heading">
+                        <span class="top-text">Become Top 1%</span> 
+                        in the AI-First World
+                    </h1>
+                    <p class="hero-paragraph">
+                        Whether it is Product, Growth, Design, Business, Tech or Data, SyncSkill is the place to learn from top experts in the field to become the Top 1%.
+                    </p>
+                    <a href="#programs" class="explore-button">
+                        <span>Explore Programs</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
+                            <path d="M1 7.11108L6 12L11 7.11108" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M1 1L6 5.88889L11 1" stroke="currentColor" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-right">
+                    <lottie-player
+                        src="./bg.json" 
+                        background="transparent"
+                        speed="0.8"
+                        style="width: 100%; max-width: 360px;"
+                        loop
+                        autoplay>
+                    </lottie-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DASHBOARD -->
+    <section class="dashboard-container">
+        <div class="dash-left-main">
+            <div class="section-header-dash">
+                <h2 class="section-title-dash">10M+ Learners</h2>
+                <p class="section-subtitle-dash">have reaped benefits from our programs</p>
+            </div>
+            <div class="marquee-wrapper">
+                <div class="marquee-row">
+                    <div class="feature-card" style="--theme-color: #6366f1;">
+                        <div class="icon-box"><i data-lucide="zap"></i></div>
+                        <div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div>
+                    </div>
+                    <div class="feature-card" style="--theme-color: #ec4899;">
+                        <div class="icon-box"><i data-lucide="shield-check"></i></div>
+                        <div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div>
+                    </div>
+                    <div class="feature-card" style="--theme-color: #f59e0b;">
+                        <div class="icon-box"><i data-lucide="layers"></i></div>
+                        <div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div>
+                    </div>
+                    <div class="feature-card" style="--theme-color: #10b981;">
+                        <div class="icon-box"><i data-lucide="users"></i></div>
+                        <div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div>
+                    </div>
+                    <!-- Duplicates for marquee -->
+                    <div class="feature-card" style="--theme-color: #6366f1;"><div class="icon-box"><i data-lucide="zap"></i></div><div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div></div>
+                    <div class="feature-card" style="--theme-color: #ec4899;"><div class="icon-box"><i data-lucide="shield-check"></i></div><div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div></div>
+                    <div class="feature-card" style="--theme-color: #f59e0b;"><div class="icon-box"><i data-lucide="layers"></i></div><div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div></div>
+                    <div class="feature-card" style="--theme-color: #10b981;"><div class="icon-box"><i data-lucide="users"></i></div><div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="dash-right-animation">
+            <div class="lottie-container">
+                <lottie-player
+                    src="./animation.json" 
+                    background="transparent"
+                    speed="0.8"
+                    style="width: 100%; height: 100%;" 
+                    loop
+                    autoplay>
+                </lottie-player>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS CAROUSEL -->
+    <section class="skills-section">
+        <div class="skills-intro">
+            <h2>Learn <span>essential</span> career and <span>life</span> skills</h2>
+            <p>SyncSkill helps you build in-demand skills fast and advance your career in a changing job market.</p>
+        </div>
+
+        <div class="carousel-viewport">
+            <div class="card-wrapper" id="cardWrapper">
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600')"><div class="card-footer"><span>Generative AI</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600')"><div class="card-footer"><span>IT Certifications</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1551288049-bbda38a5f452?w=600')"><div class="card-footer"><span>Data Science</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600')"><div class="card-footer"><span>Cybersecurity</span><i data-lucide="arrow-right"></i></div></div>
+                <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600')"><div class="card-footer"><span>Product Design</span><i data-lucide="arrow-right"></i></div></div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="nav-btn" id="prevBtn"><i data-lucide="chevron-left"></i></button>
+                <div class="dots" id="dotContainer"></div>
+                <button class="nav-btn" id="nextBtn"><i data-lucide="chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: COURSES UI (AI & Python) - REDESIGNED CARDS -->
+    <section class="courses-section">
+        <div class="container-lg">
+            
+            <div class="section-header-left">
+                <h2 class="headline">Explore Top Courses</h2>
+                <p class="subheadline">Master the most in-demand skills with our structured learning paths designed for beginners and pros alike.</p>
+            </div>
+
+            <!-- AI Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="cpu" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Artificial Intelligence (AI)
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <!-- Card 1: Machine Learning -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-purple">Machine Learning</span>
+                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=800&auto=format&fit=crop" alt="Machine Learning">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Intro to Machine Learning</h3>
+                            <p class="desc">Understand core algorithms, predictive modeling, and real-world ML applications.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 16 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 30m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Deep Learning -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-dark">Deep Learning</span>
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Neural Networks">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Deep Learning & Neural Nets</h3>
+                            <p class="desc">Build powerful neural networks using TensorFlow and PyTorch frameworks.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 22 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 15m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Generative AI -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-blue">Generative AI</span>
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="Generative AI">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Generative AI Models</h3>
+                            <p class="desc">Explore LLMs, prompt engineering, and the architecture behind ChatGPT.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 14 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 45m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Computer Vision -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-orange">Data Science</span>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Computer Vision">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Computer Vision basics</h3>
+                            <p class="desc">Learn image processing, object detection, and OpenCV implementation.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 00m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Python Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="code" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Python
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <!-- Card 1: Python for Beginners -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-green">Beginner</span>
+                            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop" alt="Python Code">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Python for Beginners</h3>
+                            <p class="desc">Start your programming journey with Python syntax, loops, and functions.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 20 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 10h 30m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Django Web Development -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-orange">Backend</span>
+                            <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop" alt="Django Web">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Django Web Development</h3>
+                            <p class="desc">Build secure, scalable, and robust backend web applications using Django.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 24 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 14h 15m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Data Analysis with Pandas -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-blue">Data Analysis</span>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Data Analysis">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Data Analysis with Pandas</h3>
+                            <p class="desc">Master data manipulation, cleaning, and visualization techniques in Python.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 45m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Python Automation -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-dark">Automation</span>
+                            <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800&auto=format&fit=crop" alt="Automation script">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Python Automation</h3>
+                            <p class="desc">Automate the boring stuff: write scripts for web scraping, file management, and more.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 12 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 6h 00m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: SCHOLARSHIP BANNER -->
+    <div class="scholarship-outer-wrapper">
+        <div class="scholarship-banner">
+            <div class="content-left">
+                <h2 class="scholarship-title">Take a test for free and win up to 50% scholarship</h2>
+                
+                <div class="details-row">
+                    <div class="detail-item">
+                        <img src="https://static.uacdn.net/production/_next/static/images/dst/tick.svg" class="tick-icon" alt="tick">
+                        Just 15 minutes
+                    </div>
+                    <div class="detail-item">
+                        <img src="https://static.uacdn.net/production/_next/static/images/dst/tick.svg" class="tick-icon" alt="tick">
+                        15 quick questions
+                    </div>
+                </div>
+
+                <a href="#" class="cta-button">Attempt test now</a>
+            </div>
+
+            <div class="graphics-right">
+                <img src="https://static.uacdn.net/production/_next/static/images/dst/trophy-v2.svg" class="trophy-img" alt="Scholarship Trophy">
+                
+                <div class="ticket-badge">
+                    <p class="ticket-text">Scholarships worth up to 50% subscription price to be won</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div id="menuOverlay"></div>
+    <!-- SECTION 6: MORE COURSES UI (Full-Stack & Cloud) - REDESIGNED CARDS -->
+    <section class="courses-section">
+        <div class="container-lg">
+            
+            <!-- Full-Stack Web Development Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="layout" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Full-Stack Web Development
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <!-- Card 1: Modern React.js -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-blue">Frontend</span>
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="React Development">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Modern React.js</h3>
+                            <p class="desc">Build highly interactive, component-driven user interfaces using hooks and state management.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 20 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 10h 30m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
+                    <!-- Card 2: Node.js & Express API -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-green">Backend</span>
+                            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=800&auto=format&fit=crop" alt="Node.js Development">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Node.js & Express API</h3>
+                            <p class="desc">Create fast, scalable server-side applications and RESTful APIs using JavaScript.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 18 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 9h 15m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
+                    <!-- Card 3: UI/UX for Developers -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-orange">Design</span>
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop" alt="UI/UX Design">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">UI/UX for Developers</h3>
+                            <p class="desc">Learn design fundamentals, layout principles, and Figma basics to build better products.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 12 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 5h 45m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-  <script>
-    (function() {
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuButton = document.getElementById('mobileMenuButton');
-      const menuOverlay = document.getElementById('menuOverlay');
+                    <!-- Card 4: Next.js Architecture -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-purple">Full-Stack</span>
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Next.js Development">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Next.js Architecture</h3>
+                            <p class="desc">Master server-side rendering, static site generation, and full-stack deployment.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 24 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 12h 00m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-      // SVG icons
-      const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
-      const closeSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>';
+                </div>
+            </div>
 
-      function setMenuIcon(isOpen) {
-        mobileMenuButton.innerHTML = isOpen ? closeSVG : hamburgerSVG;
-      }
+            <!-- Cloud Computing & DevOps Category -->
+            <div class="category-section">
+                <h3 class="category-heading">
+                    <i data-lucide="cloud" style="width: 24px; color: var(--courses-primary-accent);"></i>
+                    Cloud Computing & DevOps
+                </h3>
+                
+                <div class="courses-grid">
+                    
+                    <!-- Card 1: AWS Solutions Architect -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-blue">Cloud</span>
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" alt="AWS Cloud Server">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">AWS Solutions Architect</h3>
+                            <p class="desc">Learn core AWS services, architecture best practices, and cloud deployment.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 30 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 15h 00m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-      function toggleMenu() {
-        const isActive = mobileMenu.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
-        setMenuIcon(isActive);
-        document.body.style.overflow = isActive ? 'hidden' : '';
-      }
+                    <!-- Card 2: Docker & Kubernetes -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-dark">Containers</span>
+                            <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=800&auto=format&fit=crop" alt="Docker Containers">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Docker & Kubernetes</h3>
+                            <p class="desc">Containerize applications and manage large-scale deployments effortlessly.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 22 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 11h 30m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-      mobileMenuButton.addEventListener('click', toggleMenu);
-      menuOverlay.addEventListener('click', toggleMenu);
+                    <!-- Card 3: CI/CD Pipelines -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-orange">Automation</span>
+                            <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&auto=format&fit=crop" alt="CI/CD Workflow">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">CI/CD Pipelines</h3>
+                            <p class="desc">Implement continuous integration and deployment using GitHub Actions and Jenkins.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 15 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 7h 45m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-          mobileMenu.classList.remove('active');
-          menuOverlay.classList.remove('active');
-          document.body.style.overflow = '';
-          setMenuIcon(false);
-        }
-      });
+                    <!-- Card 4: Cloud Security Basics -->
+                    <div class="course-card-new">
+                        <div class="img-wrapper">
+                            <span class="badge t-green">Security</span>
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" alt="Cybersecurity Shield">
+                        </div>
+                        <div class="content">
+                            <h3 class="course-name">Cloud Security Basics</h3>
+                            <p class="desc">Secure your infrastructure, manage identity access, and monitor threats.</p>
+                            <div class="meta">
+                                <div class="meta-item"><i data-lucide="layers" width="14"></i> 16 Lessons</div>
+                                <div class="meta-item"><i data-lucide="clock" width="14"></i> 8h 15m</div>
+                            </div>
+                            <button class="action-btn">Start Learning <i data-lucide="chevron-right" width="16"></i></button>
+                        </div>
+                    </div>
 
-      setMenuIcon(false);
-    })();
-  </script>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Combined Script: Lucide icons + Carousel logic + Courses interactivity + Navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // ----- Skills Carousel Logic (with touch) -----
+            (function() {
+                const wrapper = document.getElementById('cardWrapper');
+                const dotsContainer = document.getElementById('dotContainer');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const cards = document.querySelectorAll('.skill-card');
+                let currentIndex = 0;
+
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const minSwipeDistance = 50;
+
+                function getVisibleCount() {
+                    if (window.innerWidth <= 600) return 1;
+                    if (window.innerWidth <= 1100) return 2;
+                    return 3;
+                }
+
+                function createDots() {
+                    dotsContainer.innerHTML = '';
+                    const visibleCards = getVisibleCount();
+                    const maxScrollPositions = cards.length - visibleCards + 1;
+
+                    for (let i = 0; i < maxScrollPositions; i++) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        if (i === currentIndex) dot.classList.add('active');
+                        dot.addEventListener('click', () => goToSlide(i));
+                        dotsContainer.appendChild(dot);
+                    }
+                }
+
+                function updateCarousel() {
+                    const visibleCards = getVisibleCount();
+                    const maxIndex = cards.length - visibleCards;
+                    
+                    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+                    const cardWidth = cards[0].getBoundingClientRect().width;
+                    const gap = parseFloat(getComputedStyle(wrapper).gap) || 24;
+                    const moveAmount = currentIndex * (cardWidth + gap);
+
+                    wrapper.style.transform = `translateX(-${moveAmount}px)`;
+                    
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex >= maxIndex;
+
+                    const dots = document.querySelectorAll('.dot');
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
+
+                function goToSlide(i) {
+                    currentIndex = i;
+                    updateCarousel();
+                }
+
+                // Touch events
+                wrapper.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                wrapper.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const deltaX = touchEndX - touchStartX;
+                    if (Math.abs(deltaX) < minSwipeDistance) return;
+
+                    const visibleCards = getVisibleCount();
+                    const maxIndex = cards.length - visibleCards;
+
+                    if (deltaX > 0 && currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                    } else if (deltaX < 0 && currentIndex < maxIndex) {
+                        currentIndex++;
+                        updateCarousel();
+                    }
+                }, { passive: true });
+
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) currentIndex--;
+                    updateCarousel();
+                });
+
+                nextBtn.addEventListener('click', () => { 
+                    const maxIndex = cards.length - getVisibleCount();
+                    if (currentIndex < maxIndex) currentIndex++; 
+                    updateCarousel(); 
+                });
+
+                window.addEventListener('resize', () => {
+                    createDots();
+                    updateCarousel();
+                });
+
+                createDots();
+                updateCarousel();
+            })();
+
+            // ----- Courses Section Interactivity (for all courses) -----
+            const courseCards = document.querySelectorAll('.course-card-new');
+            courseCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const courseName = this.querySelector('.course-name').textContent;
+                    alert(`Navigating to details page for: ${courseName}`);
+                });
+            });
+
+            const actionBtns = document.querySelectorAll('.action-btn');
+            actionBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const courseName = this.closest('.course-card-new').querySelector('.course-name').textContent;
+                    alert(`Button clicked! Navigating to: ${courseName}`);
+                });
+            });
+
+            // ----- Navbar functionality -----
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            // SVG icons
+            const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+            const closeSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>';
+
+            function setMenuIcon(isOpen) {
+                mobileMenuButton.innerHTML = isOpen ? closeSVG : hamburgerSVG;
+            }
+
+            function toggleMenu() {
+                const isActive = mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                setMenuIcon(isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', toggleMenu);
+            }
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', toggleMenu);
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768 && mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    setMenuIcon(false);
+                }
+            });
+
+            setMenuIcon(false);
+        });
+    </script>
 </body>
 </html>
