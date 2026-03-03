@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IHTNAS – Header Only</title>
+  <title>SyncSkill – Responsive Header (menu X fix)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,26 +17,20 @@
 
     :root {
       --spacing: 0.25rem;
-      --color-gray-200: oklch(92.8% 0.006 264.531);
       --color-white: #fff;
-      --color-black: #000;
       --color-dark-teal: #012726;
       --color-teal-hover: #004D4B;
-      --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
       --font-weight-medium: 500;
-      --font-weight-normal: 400;
-      --font-weight-bold: 700;
-      --text-base: 1rem;
-      --text-base--line-height: 1.5;
-      --radius-md: 0.375rem;
-      --default-transition-duration: 0.15s;
-      --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      --radius-full: 9999px;
+      --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --header-height: 72px;
     }
 
     body {
       font-family: var(--font-sans);
       line-height: 1.6;
-      padding-top: 72px; /* space for fixed header */
+      padding-top: var(--header-height);
     }
 
     /* ----- HEADER ----- */
@@ -44,374 +38,277 @@
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 50;
+      height: var(--header-height);
+      z-index: 100; /* Highest priority */
       background-color: var(--color-white);
-      transition-property: all;
-      transition-duration: 0.3s;
-      transition-timing-function: var(--default-transition-timing-function);
-      overflow: visible;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
     }
 
     .header-container {
       width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (min-width: 48rem) {
-      .header-container {
-        width: 80%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header-container {
-        padding-left: 16px;
-        padding-right: 16px;
-        width: 100%;
-      }
-    }
-
-    .nav {
-      padding-top: calc(var(--spacing) * 3);
-      padding-bottom: calc(var(--spacing) * 3);
+      margin: 0 auto;
+      max-width: 1280px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: calc(var(--spacing) * 6);
+      gap: 32px;
     }
 
     .logo {
-      width: 160px;
+      width: 140px;
       height: auto;
       display: block;
     }
 
     .nav-links {
       display: none;
-      align-items: center;
-      gap: calc(var(--spacing) * 4);
+      gap: 8px;
     }
 
-    @media (min-width: 48rem) {
-      .nav-links {
-        display: flex;
-      }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
     }
 
     .nav-link {
-      padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-      font-size: var(--text-base);
-      line-height: var(--text-base--line-height);
+      padding: 8px 16px;
       font-weight: var(--font-weight-medium);
       color: var(--color-dark-teal);
       text-decoration: none;
-      border-radius: var(--radius-md);
-      transition-property: color, background-color;
-      transition-duration: var(--default-transition-duration);
-      transition-timing-function: var(--default-transition-timing-function);
+      border-radius: var(--radius-full);
+      transition: 0.2s;
     }
 
-    @media (hover: hover) {
-      .nav-link:hover {
-        color: var(--color-white);
-        background-color: var(--color-dark-teal);
-      }
+    .nav-link:hover {
+      background-color: #f8fafc;
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: calc(var(--spacing) * 4);
     }
 
-    .menu-button {
-      display: flex;
-      padding: calc(var(--spacing) * 1.5);
-      border: 1px solid var(--color-dark-teal);
-      border-radius: var(--radius-md);
-      color: var(--color-dark-teal);
-      background-color: transparent;
-      cursor: pointer;
-    }
-
-    @media (min-width: 48rem) {
-      .menu-button {
-        display: none;
-      }
-    }
-
+    /* Auth Buttons (Desktop) */
     .auth-buttons {
       display: none;
-      align-items: center;
-      gap: calc(var(--spacing) * 4);
+      gap: 12px;
     }
 
-    @media (min-width: 48rem) {
-      .auth-buttons {
-        display: flex;
-      }
+    @media (min-width: 768px) {
+      .auth-buttons { display: flex; }
     }
 
     .auth-button {
-      padding: calc(var(--spacing) * 2) calc(var(--spacing) * 5);
-      font-size: var(--text-base);
-      line-height: var(--text-base--line-height);
+      padding: 10px 24px;
       font-weight: var(--font-weight-medium);
-      border: 1px solid var(--color-dark-teal);
-      border-radius: var(--radius-md);
-      color: var(--color-dark-teal);
+      border-radius: 8px; /* Matching the boxier look in the screenshot */
       text-decoration: none;
-      background-color: transparent;
-      transition: all var(--default-transition-duration);
+      transition: 0.2s;
+      border: 1px solid var(--color-dark-teal);
     }
 
     .auth-button.submit {
       background-color: var(--color-dark-teal);
       color: var(--color-white);
-      border: none;
     }
 
-    @media (hover: hover) {
-      .auth-button:hover {
-        color: var(--color-white);
-        background-color: var(--color-teal-hover);
-      }
+    /* Hamburger / Close Button (Mobile) */
+    .menu-button {
+      display: flex;
+      padding: 8px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      color: var(--color-dark-teal);
+      transition: background-color 0.2s;
     }
 
-    .divider {
-      height: 1px;
-      background-color: var(--color-gray-200);
+    .menu-button:hover {
+      background-color: #f1f5f9;
     }
 
-    /* ----- MOBILE MENU ----- */
+    @media (min-width: 768px) {
+      .menu-button { display: none; }
+    }
+
+    /* ----- MOBILE MENU (DROPDOWN) ----- */
     #mobileMenu {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 75vw;
-      max-width: 320px;
-      background: #ffffff;
-      padding: 24px 16px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-      z-index: 1000;
-      border-top-left-radius: 16px;
+      top: var(--header-height); /* Starts right below header */
+      left: 0;
+      width: 100%;
+      background: var(--color-white);
+      z-index: 90; /* Just below header */
+      transform: translateY(-110%); /* Hidden above */
+      transition: transform 0.3s ease-in-out;
+      padding: 24px 5%;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
+      gap: 20px;
     }
 
     #mobileMenu.active {
-      transform: translateX(0);
+      transform: translateY(0);
+    }
+
+    .mobile-nav-link {
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-dark-teal);
+      padding: 8px 0;
+    }
+
+    .mobile-auth-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .mobile-auth-button {
+      width: 100%;
+      padding: 14px;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--color-dark-teal);
+    }
+
+    .mobile-auth-button.submit {
+      background: var(--color-dark-teal);
+      color: var(--color-white);
     }
 
     #menuOverlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(2px);
+      z-index: 80;
       display: none;
     }
 
     #menuOverlay.active {
       display: block;
     }
-
-    .mobile-menu-close {
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      align-self: flex-end;
-      margin-bottom: 24px;
-      cursor: pointer;
-    }
-
-    .mobile-menu-close svg {
-      width: 24px;
-      height: 24px;
-      color: #4b5563;
-    }
-
-    .mobile-menu-content {
-      flex-grow: 1;
-      overflow-y: auto;
-    }
-
-    .mobile-menu-section {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .mobile-menu-group {
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 8px;
-    }
-
-    .mobile-menu-header {
-      font-size: 16px;
-      font-weight: 700;
-      color: #2d3436;
-      margin: 0;
-      padding: 12px 0;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .mobile-menu-auth {
-      flex-shrink: 0;
-      padding-top: 20px;
-    }
-
-    .mobile-menu-auth-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .mobile-menu-auth-button {
-      padding: 12px;
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s ease;
-      font-weight: 600;
-    }
-
-    .mobile-menu-auth-button.submit {
-      background: var(--color-dark-teal);
-      color: var(--color-white);
-    }
-
-    .mobile-menu-auth-button.join {
-      border: 1px solid #d1d5db;
-      color: #4b5563;
-    }
-
-    @media (min-width: 769px) {
-      #mobileMenu {
-        display: none !important;
-      }
-    }
   </style>
 </head>
 <body>
+
   <header class="header">
     <div class="header-container">
-      <nav class="nav">
-        <div class="nav-left">
-          <a href="/">
-            <img class="logo" src="https://syncskill.in/assets/syncskill-logo.svg" alt="Logo" loading="eager">
-          </a>
-          <div class="nav-links">
-            <a class="nav-link" href="/upskill">Upskill your Team</a>
-            <a class="nav-link" href="/about-us">About</a>
-          </div>
-        </div>
-        <div class="nav-right">
-          <button class="menu-button" id="mobileMenuButton">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
-          <div class="auth-buttons">
-            <a class="auth-button submit" href="/login">Login</a>
-            <a class="auth-button" href="/apply">Apply as Mentor</a>
-          </div>
-        </div>
-      </nav>
-
-      <div id="mobileMenu">
-        <div class="mobile-menu-close" id="mobileMenuClose">
-          <svg viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </div>
-        <div class="mobile-menu-content">
-          <div class="mobile-menu-section">
-            <a href="/upskill" style="text-decoration: none;">
-              <div class="mobile-menu-group">
-                <h3 class="mobile-menu-header">
-                  <span>Upskill your Team</span>
-                </h3>
-              </div>
-            </a>
-            <a href="/about-us" style="text-decoration: none;">
-              <div class="mobile-menu-group">
-                <h3 class="mobile-menu-header">
-                  <span>About</span>
-                </h3>
-              </div>
-            </a>
-            <a href="/contact-us" style="text-decoration: none;">
-              <div class="mobile-menu-group">
-                <h3 class="mobile-menu-header">
-                  <span>Contact us</span>
-                </h3>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="mobile-menu-auth">
-          <div class="mobile-menu-auth-buttons">
-            <a href="/login" class="mobile-menu-auth-button submit">Login</a>
-            <a href="/apply" class="mobile-menu-auth-button join">Apply as Mentor</a>
-          </div>
+      <div class="nav-left">
+        <a href="/" aria-label="Home">
+          <img class="logo" src="https://syncskill.in/assets/syncskill-logo.svg" alt="SyncSkill Logo">
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="/upskill">Upskill your Team</a>
+          <a class="nav-link" href="/about-us">About</a>
         </div>
       </div>
-      <div id="menuOverlay"></div>
-      <div class="divider"></div>
+
+      <div class="nav-right">
+        <!-- menu button: icon will be swapped via JS -->
+        <button class="menu-button" id="mobileMenuButton" aria-label="Open menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <div class="auth-buttons">
+          <a class="auth-button" href="/login" style="color: var(--color-dark-teal);">Login</a>
+          <a class="auth-button submit" href="/apply">Apply as Mentor</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main style="padding: 2rem; text-align: center;">
-    <h1>Welcome to the Platform</h1>
-    <p>The navigation and logo have been updated according to your requirements.</p>
+  <div id="mobileMenu">
+    <a href="/upskill" class="mobile-nav-link">Upskill your Team</a>
+    <a href="/about-us" class="mobile-nav-link">About</a>
+    <div class="mobile-auth-stack">
+      <a href="/login" class="mobile-auth-button">Login</a>
+      <a href="/apply" class="mobile-auth-button submit">Apply as Mentor</a>
+    </div>
+  </div>
+
+  <div id="menuOverlay"></div>
+
+  <main style="padding: 4rem 2rem; text-align: center;">
+    <h1>Main Content Area</h1>
+    <p>Scroll down or resize to see the navigation in action — on mobile the hamburger turns into an X when menu is open.</p>
   </main>
 
   <script>
-    (function() {
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuButton = document.getElementById('mobileMenuButton');
-      const mobileMenuClose = document.getElementById('mobileMenuClose');
-      const menuOverlay = document.getElementById('menuOverlay');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const menuOverlay = document.getElementById('menuOverlay');
 
-      function toggleMobileMenu() {
-        const isOpen = mobileMenu.classList.contains('active');
-        if (isOpen) {
-          mobileMenu.classList.remove('active');
-          menuOverlay.classList.remove('active');
-        } else {
-          mobileMenu.classList.add('active');
-          menuOverlay.classList.add('active');
+    // SVG icons as strings for toggling
+    const HAMBURGER_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+    const CLOSE_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>`;
+
+    function toggleMenu() {
+      const isActive = mobileMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+      
+      // Toggle body scroll to prevent background scrolling
+      document.body.style.overflow = isActive ? 'hidden' : '';
+
+      // Update button icon and accessibility label
+      if (isActive) {
+        mobileMenuButton.innerHTML = CLOSE_ICON;
+        mobileMenuButton.setAttribute('aria-label', 'Close menu');
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
+      } else {
+        mobileMenuButton.innerHTML = HAMBURGER_ICON;
+        mobileMenuButton.setAttribute('aria-label', 'Open menu');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    mobileMenuButton.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    // Close menu if window is resized to desktop width, and ensure icon is reset
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+        // Force close menu without toggling icon twice? We'll just call toggleMenu which handles both.
+        toggleMenu();
+      } else if (window.innerWidth >= 768 && !mobileMenu.classList.contains('active')) {
+        // When resized to desktop while menu closed, make sure the button shows hamburger (already correct, but just in case)
+        // This is optional, but we want the icon to always be hamburger on desktop if the button were visible (it's hidden anyway)
+        // However the button is hidden via CSS, so no visual issue. But we keep it consistent.
+        if (mobileMenuButton.innerHTML.includes('M6 18L18 6')) { // if it's X icon, reset to hamburger (though button hidden)
+          mobileMenuButton.innerHTML = HAMBURGER_ICON;
+          mobileMenuButton.setAttribute('aria-label', 'Open menu');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
         }
       }
+    });
 
-      mobileMenuButton.addEventListener('click', toggleMobileMenu);
-      mobileMenuClose.addEventListener('click', toggleMobileMenu);
-      menuOverlay.addEventListener('click', toggleMobileMenu);
+    // Also ensure that if the menu is closed by any other means (like pressing ESC could be added), but we keep it simple.
+    // Optional: close on ESC key for better UX
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
 
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-          mobileMenu.classList.remove('active');
-          menuOverlay.classList.remove('active');
-        }
-      });
-    })();
+    // Edge case: if the button is somehow out of sync on page load, ensure correct icon (hamburger)
+    // But mobile menu is hidden initially, so it's fine.
   </script>
+
 </body>
 </html>
