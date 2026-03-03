@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SyncSkill – Responsive Header (menu X fix)</title>
+  <title>SyncSkill – refined header (buttons match, hover cleanup)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,6 +31,13 @@
       font-family: var(--font-sans);
       line-height: 1.6;
       padding-top: var(--header-height);
+      color: var(--color-dark-teal);
+    }
+
+    /* Remove default tap highlight on mobile for all interactive elements */
+    a, button, .nav-link, .auth-button, .mobile-nav-link, .mobile-auth-button, .menu-button {
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
     }
 
     /* ----- HEADER ----- */
@@ -39,7 +46,7 @@
       top: 0;
       width: 100%;
       height: var(--header-height);
-      z-index: 100; /* Highest priority */
+      z-index: 100;
       background-color: var(--color-white);
       border-bottom: 1px solid #f1f5f9;
       display: flex;
@@ -81,12 +88,14 @@
       font-weight: var(--font-weight-medium);
       color: var(--color-dark-teal);
       text-decoration: none;
-      border-radius: var(--radius-full);
-      transition: 0.2s;
+      border-radius: 0; /* no oval shape */
+      transition: color 0.2s ease;
+      background: transparent;
     }
 
     .nav-link:hover {
-      background-color: #f8fafc;
+      color: var(--color-teal-hover); /* only text color changes */
+      background: transparent;
     }
 
     .nav-right {
@@ -94,7 +103,7 @@
       align-items: center;
     }
 
-    /* Auth Buttons (Desktop) */
+    /* Auth Buttons (Desktop) — both outline, same style */
     .auth-buttons {
       display: none;
       gap: 12px;
@@ -107,18 +116,22 @@
     .auth-button {
       padding: 10px 24px;
       font-weight: var(--font-weight-medium);
-      border-radius: 8px; /* Matching the boxier look in the screenshot */
+      border-radius: 8px;
       text-decoration: none;
-      transition: 0.2s;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s;
       border: 1px solid var(--color-dark-teal);
+      color: var(--color-dark-teal);
+      background: transparent;
     }
 
-    .auth-button.submit {
+    /* Hover effect for both buttons: fill with teal */
+    .auth-button:hover {
       background-color: var(--color-dark-teal);
       color: var(--color-white);
+      border-color: var(--color-dark-teal);
     }
 
-    /* Hamburger / Close Button (Mobile) */
+    /* Hamburger Button (Mobile) */
     .menu-button {
       display: flex;
       padding: 8px;
@@ -127,11 +140,10 @@
       background: transparent;
       cursor: pointer;
       color: var(--color-dark-teal);
-      transition: background-color 0.2s;
+      transition: background 0.1s;
     }
-
     .menu-button:hover {
-      background-color: #f1f5f9;
+      background: #f1f5f9;
     }
 
     @media (min-width: 768px) {
@@ -141,12 +153,12 @@
     /* ----- MOBILE MENU (DROPDOWN) ----- */
     #mobileMenu {
       position: fixed;
-      top: var(--header-height); /* Starts right below header */
+      top: var(--header-height);
       left: 0;
       width: 100%;
       background: var(--color-white);
-      z-index: 90; /* Just below header */
-      transform: translateY(-110%); /* Hidden above */
+      z-index: 90;
+      transform: translateY(-110%);
       transition: transform 0.3s ease-in-out;
       padding: 24px 5%;
       box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
@@ -165,6 +177,13 @@
       text-decoration: none;
       color: var(--color-dark-teal);
       padding: 8px 0;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--color-teal-hover);
+      background: transparent;
     }
 
     .mobile-auth-stack {
@@ -183,10 +202,14 @@
       text-decoration: none;
       font-weight: 600;
       border: 1px solid var(--color-dark-teal);
+      color: var(--color-dark-teal);
+      background: transparent;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .mobile-auth-button.submit {
-      background: var(--color-dark-teal);
+    .mobile-auth-button:hover {
+      background-color: var(--color-dark-teal);
       color: var(--color-white);
     }
 
@@ -219,96 +242,76 @@
       </div>
 
       <div class="nav-right">
-        <!-- menu button: icon will be swapped via JS -->
-        <button class="menu-button" id="mobileMenuButton" aria-label="Open menu" aria-expanded="false">
+        <button class="menu-button" id="mobileMenuButton" aria-label="Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
 
+        <!-- Desktop buttons: both outline, same style -->
         <div class="auth-buttons">
-          <a class="auth-button" href="/login" style="color: var(--color-dark-teal);">Login</a>
-          <a class="auth-button submit" href="/apply">Apply as Mentor</a>
+          <a class="auth-button" href="/login">Login</a>
+          <a class="auth-button" href="/apply">Apply as Mentor</a>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- mobile drawer -->
   <div id="mobileMenu">
     <a href="/upskill" class="mobile-nav-link">Upskill your Team</a>
     <a href="/about-us" class="mobile-nav-link">About</a>
     <div class="mobile-auth-stack">
+      <!-- both outline on mobile too, hover works (though tap is primary) -->
       <a href="/login" class="mobile-auth-button">Login</a>
-      <a href="/apply" class="mobile-auth-button submit">Apply as Mentor</a>
+      <a href="/apply" class="mobile-auth-button">Apply as Mentor</a>
     </div>
   </div>
 
   <div id="menuOverlay"></div>
 
   <main style="padding: 4rem 2rem; text-align: center;">
-    <h1>Main Content Area</h1>
-    <p>Scroll down or resize to see the navigation in action — on mobile the hamburger turns into an X when menu is open.</p>
+    <h1>Main content — refined header</h1>
+    <p>✅ Both buttons now match (outline) and fill on hover.</p>
+    <p>✅ Nav links only change text color on hover — no background pill.</p>
+    <p>✅ Blue tap highlight removed from all interactive elements.</p>
   </main>
 
   <script>
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileMenuButton = document.getElementById('mobileMenuButton');
-    const menuOverlay = document.getElementById('menuOverlay');
+    (function() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuButton = document.getElementById('mobileMenuButton');
+      const menuOverlay = document.getElementById('menuOverlay');
 
-    // SVG icons as strings for toggling
-    const HAMBURGER_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
-    const CLOSE_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>`;
+      // SVG icons
+      const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+      const closeSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>';
 
-    function toggleMenu() {
-      const isActive = mobileMenu.classList.toggle('active');
-      menuOverlay.classList.toggle('active');
-      
-      // Toggle body scroll to prevent background scrolling
-      document.body.style.overflow = isActive ? 'hidden' : '';
-
-      // Update button icon and accessibility label
-      if (isActive) {
-        mobileMenuButton.innerHTML = CLOSE_ICON;
-        mobileMenuButton.setAttribute('aria-label', 'Close menu');
-        mobileMenuButton.setAttribute('aria-expanded', 'true');
-      } else {
-        mobileMenuButton.innerHTML = HAMBURGER_ICON;
-        mobileMenuButton.setAttribute('aria-label', 'Open menu');
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      function setMenuIcon(isOpen) {
+        mobileMenuButton.innerHTML = isOpen ? closeSVG : hamburgerSVG;
       }
-    }
 
-    mobileMenuButton.addEventListener('click', toggleMenu);
-    menuOverlay.addEventListener('click', toggleMenu);
+      function toggleMenu() {
+        const isActive = mobileMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        setMenuIcon(isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      }
 
-    // Close menu if window is resized to desktop width, and ensure icon is reset
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-        // Force close menu without toggling icon twice? We'll just call toggleMenu which handles both.
-        toggleMenu();
-      } else if (window.innerWidth >= 768 && !mobileMenu.classList.contains('active')) {
-        // When resized to desktop while menu closed, make sure the button shows hamburger (already correct, but just in case)
-        // This is optional, but we want the icon to always be hamburger on desktop if the button were visible (it's hidden anyway)
-        // However the button is hidden via CSS, so no visual issue. But we keep it consistent.
-        if (mobileMenuButton.innerHTML.includes('M6 18L18 6')) { // if it's X icon, reset to hamburger (though button hidden)
-          mobileMenuButton.innerHTML = HAMBURGER_ICON;
-          mobileMenuButton.setAttribute('aria-label', 'Open menu');
-          mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.addEventListener('click', toggleMenu);
+      menuOverlay.addEventListener('click', toggleMenu);
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+          menuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          setMenuIcon(false);
         }
-      }
-    });
+      });
 
-    // Also ensure that if the menu is closed by any other means (like pressing ESC could be added), but we keep it simple.
-    // Optional: close on ESC key for better UX
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-        toggleMenu();
-      }
-    });
-
-    // Edge case: if the button is somehow out of sync on page load, ensure correct icon (hamburger)
-    // But mobile menu is hidden initially, so it's fine.
+      setMenuIcon(false);
+    })();
   </script>
-
 </body>
 </html>
