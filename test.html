@@ -1050,45 +1050,45 @@
             font-family: var(--font-main);
         }
 
-        /* --- NEW SECTION: Why learn with SyncSkill (features grid) --- */
-        .features-section {
+        /* --- NEW SECTION: WHY LEARN WITH US --- */
+        .why-section {
             width: 100%;
-            background-color: #ffffff;
+            background-color: #f3f4f6;  /* light gray as in original snippet */
             padding: 80px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .features-section .container {
+        .why-section .container-why {
             width: 92%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 4rem; /* same as hero/courses inner padding */
+            padding: 0 4rem;  /* match hero inner padding */
         }
 
-        .features-section .title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--courses-text-dark);
+        .why-section h2 {
+            font-size: 36px;
+            font-weight: 600;
             margin-bottom: 60px;
-            letter-spacing: -0.02em;
             font-family: var(--font-main);
+            color: #111;
+            text-align: left;
         }
 
-        .features-section .features {
+        .why-features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 60px 120px;
         }
 
-        .features-section .feature {
+        .why-feature {
             display: flex;
             align-items: flex-start;
             gap: 18px;
         }
 
-        .features-section .icon-box {
+        .why-icon-box {
             width: 60px;
             height: 60px;
             background: #e5e7eb;
@@ -1099,41 +1099,42 @@
             flex-shrink: 0;
         }
 
-        .features-section .icon-box img {
+        .why-icon-box img {
             width: 28px;
             height: 28px;
-            filter: brightness(0.8); /* subtle darken to match theme */
+            object-fit: contain;
         }
 
-        .features-section .feature h3 {
-            font-size: 1.1rem;
+        .why-feature h3 {
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 6px;
-            color: var(--courses-text-dark);
+            font-family: var(--font-main);
+            color: #111;
         }
 
-        .features-section .feature p {
-            font-size: 0.95rem;
-            color: var(--courses-text-medium);
+        .why-feature p {
+            font-size: 14px;
+            color: #6b7280;
             line-height: 1.5;
             max-width: 420px;
+            font-family: var(--font-main);
         }
 
+        /* Responsive for new section */
         @media (max-width: 992px) {
-            .features-section .container {
-                padding: 0 1.5rem; /* match mobile hero */
+            .why-section .container-why {
+                padding: 0 1.5rem;  /* match mobile hero padding */
             }
         }
 
         @media (max-width: 768px) {
-            .features-section .features {
+            .why-features {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-
-            .features-section .title {
-                font-size: 1.875rem;
-                margin-bottom: 40px;
+            .why-section h2 {
+                font-size: 28px;
             }
         }
 
@@ -1698,45 +1699,41 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: Why learn with SyncSkill? (features grid) -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="title">Why learn with SyncSkill?</h2>
-
-            <div class="features">
-                <div class="feature">
-                    <div class="icon-box">
-                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" alt="Video icon">
+    <!-- NEW SECTION: WHY LEARN WITH US (added at bottom) -->
+    <section class="why-section">
+        <div class="container-why">
+            <h2>Why learn with SyncSkill?</h2>
+            <div class="why-features">
+                <div class="why-feature">
+                    <div class="why-icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" alt="Self-paced video">
                     </div>
                     <div>
                         <h3>Self-paced video content</h3>
                         <p>Master new skills on your schedule with our flexible, self-paced video content.</p>
                     </div>
                 </div>
-
-                <div class="feature">
-                    <div class="icon-box">
-                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" alt="Target icon">
+                <div class="why-feature">
+                    <div class="why-icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" alt="Office hours">
                     </div>
                     <div>
                         <h3>Office hours with Mentors for clearing blockers</h3>
                         <p>Overcome challenges fast with dedicated mentor office hours.</p>
                     </div>
                 </div>
-
-                <div class="feature">
-                    <div class="icon-box">
-                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" alt="Copy icon">
+                <div class="why-feature">
+                    <div class="why-icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" alt="Project driven">
                     </div>
                     <div>
                         <h3>Project driven approach to achieve outcomes</h3>
                         <p>Gain practical skills through our project-driven approach for real results.</p>
                     </div>
                 </div>
-
-                <div class="feature">
-                    <div class="icon-box">
-                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" alt="User icon">
+                <div class="why-feature">
+                    <div class="why-icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" alt="Learner network">
                     </div>
                     <div>
                         <h3>Access to network of 1000+ learners</h3>
