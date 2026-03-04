@@ -131,7 +131,7 @@
             outline: none;
         }
 
-        /* ----- HEADER (navbar) ----- */
+        /* ----- HEADER (navbar) with scroll effect ----- */
         .header {
             position: fixed;
             top: 0;
@@ -139,9 +139,16 @@
             height: var(--header-height);
             z-index: 100;
             background-color: var(--color-white);
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid transparent; /* hidden initially */
+            box-shadow: none;
             display: flex;
             align-items: center;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .header.scrolled {
+            border-bottom-color: #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .header-container {
@@ -337,11 +344,12 @@
             display: block;
         }
 
-        /* --- SECTION 1: HERO (unchanged) --- */
+        /* --- SECTION 1: HERO (unchanged except added margin-top) --- */
         .hero-section {
             width: 100%;
             padding: 1.2rem 0;
             margin-bottom: 20px;
+            margin-top: 1.5rem; /* Increased gap between navbar and hero */
         }
 
         .content-card {
@@ -690,10 +698,10 @@
         }
 
         .courses-section .container-lg {
-            width: 100%;
-            max-width: var(--courses-container-width);
-            margin: 0 auto;
-            padding: 0 24px;
+            width: 92%;               /* Match hero's outer width */
+            max-width: 1400px;         /* Match hero's max-width */
+            margin: 0 auto;             /* Center */
+            padding: 0 4rem;            /* Match hero's inner padding */
         }
 
         .courses-section .section-header-left {
@@ -886,10 +894,6 @@
         }
 
         /* Responsive for courses section */
-        @media (min-width: 1025px) {
-            .courses-section .container-lg { padding: 0; margin: 0 auto; }
-        }
-
         @media (max-width: 1024px) {
             .courses-section { padding: 50px 0; }
             .courses-section .headline { font-size: 1.875rem; }
@@ -919,6 +923,11 @@
                 scroll-snap-align: center;
                 transform: none !important;
             }
+
+            /* On mobile, reduce container padding to match hero */
+            .courses-section .container-lg {
+                padding: 0 1.5rem; /* Match hero's mobile inner padding */
+            }
         }
 
         /* --- SECTION 5: SCHOLARSHIP BANNER --- */
@@ -934,7 +943,7 @@
             width: 92%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 0;
+            padding: 60px 4rem; /* Match hero's inner padding */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1071,7 +1080,7 @@
                 flex-direction: column;
                 text-align: center;
                 gap: 50px;
-                padding: 60px 20px;
+                padding: 60px 1.5rem; /* Match mobile hero padding */
             }
             .details-row {
                 justify-content: center;
@@ -1087,7 +1096,7 @@
 </head>
 <body>
 
-    <!-- ===== NAVBAR (added) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <header class="header">
         <div class="header-container">
             <div class="nav-left">
@@ -1602,7 +1611,7 @@
         </div>
     </section>
 
-    <!-- Combined Script: Lucide icons + Carousel logic + Courses interactivity + Navbar -->
+    <!-- Combined Script: Lucide icons + Carousel logic + Courses interactivity + Navbar + Scroll effect -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Lucide icons
@@ -1727,10 +1736,22 @@
                 });
             });
 
-            // ----- Navbar functionality -----
+            // ----- Navbar functionality (mobile + scroll effect) -----
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileMenuButton = document.getElementById('mobileMenuButton');
             const menuOverlay = document.getElementById('menuOverlay');
+            const header = document.querySelector('.header');
+
+            // Scroll effect for header border/shadow
+            function updateHeaderOnScroll() {
+                if (window.scrollY > 0) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', updateHeaderOnScroll);
+            updateHeaderOnScroll(); // set initial state
 
             // SVG icons
             const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
