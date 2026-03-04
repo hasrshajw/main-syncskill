@@ -516,7 +516,7 @@
             transition: transform 0.3s var(--ease-out);
         }
 
-        .feature-card .icon-box {
+        .icon-box {
             width: 38px; height: 38px;
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
@@ -525,7 +525,7 @@
             flex-shrink: 0;
         }
         
-        .feature-card .icon-box svg { width: 20px; height: 20px; stroke-width: 2.5px; }
+        .icon-box svg { width: 20px; height: 20px; stroke-width: 2.5px; }
         .card-title { font-weight: 700; font-size: 0.85rem; color: var(--text-dark); font-family: var(--font-main); }
         .card-desc { font-size: 0.7rem; color: var(--text-medium); white-space: nowrap; font-family: var(--font-main); }
 
@@ -1050,43 +1050,45 @@
             font-family: var(--font-main);
         }
 
-        /* --- NEW SECTION: Why Learn With Us (scoped) --- */
-        .why-growthschool {
-            max-width: 1200px;
+        /* --- NEW SECTION: Why learn with SyncSkill (features grid) --- */
+        .features-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .features-section .container {
+            width: 92%;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 20px;
-            font-family: 'IBM Plex Sans', sans-serif;
-            background: #f3f4f6;  /* matches body background in snippet */
-            color: #111;
+            padding: 0 4rem; /* same as hero/courses inner padding */
         }
 
-        .why-growthschool .subheading {
-            font-size: 12px;
-            letter-spacing: 1px;
-            color: #6b7280;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .why-growthschool .title {
-            font-size: 36px;
-            font-weight: 600;
+        .features-section .title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--courses-text-dark);
             margin-bottom: 60px;
+            letter-spacing: -0.02em;
+            font-family: var(--font-main);
         }
 
-        .why-growthschool .features {
+        .features-section .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 60px 120px;
         }
 
-        .why-growthschool .feature {
+        .features-section .feature {
             display: flex;
             align-items: flex-start;
             gap: 18px;
         }
 
-        .why-growthschool .icon-box {
+        .features-section .icon-box {
             width: 60px;
             height: 60px;
             background: #e5e7eb;
@@ -1097,35 +1099,45 @@
             flex-shrink: 0;
         }
 
-        .why-growthschool .icon-box img {
+        .features-section .icon-box img {
             width: 28px;
             height: 28px;
+            filter: brightness(0.8); /* subtle darken to match theme */
         }
 
-        .why-growthschool .feature h3 {
-            font-size: 16px;
+        .features-section .feature h3 {
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 6px;
+            color: var(--courses-text-dark);
         }
 
-        .why-growthschool .feature p {
-            font-size: 14px;
-            color: #6b7280;
+        .features-section .feature p {
+            font-size: 0.95rem;
+            color: var(--courses-text-medium);
             line-height: 1.5;
             max-width: 420px;
         }
 
-        @media (max-width: 768px) {
-            .why-growthschool .features {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .why-growthschool .title {
-                font-size: 28px;
+        @media (max-width: 992px) {
+            .features-section .container {
+                padding: 0 1.5rem; /* match mobile hero */
             }
         }
 
-        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .features-section .features {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-section .title {
+                font-size: 1.875rem;
+                margin-bottom: 40px;
+            }
+        }
+
+        /* Responsive adjustments for existing sections */
         @media (max-width: 992px) {
             .content-card {
                 padding: 2.5rem 1.5rem;
@@ -1686,45 +1698,50 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: Why Learn With Us (added below all content) -->
-    <section class="why-growthschool">
-        <div class="subheading">ENTERPRISE LEARNING THAT DELIVERS</div>
-        <h2 class="title">Why learn with GrowthSchool?</h2>
-        <div class="features">
-            <div class="feature">
-                <div class="icon-box">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" alt="Self-paced video">
+    <!-- NEW SECTION: Why learn with SyncSkill? (features grid) -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="title">Why learn with SyncSkill?</h2>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" alt="Video icon">
+                    </div>
+                    <div>
+                        <h3>Self-paced video content</h3>
+                        <p>Master new skills on your schedule with our flexible, self-paced video content.</p>
+                    </div>
                 </div>
-                <div>
-                    <h3>Self-paced video content</h3>
-                    <p>Master new skills on your schedule with our flexible, self-paced video content.</p>
+
+                <div class="feature">
+                    <div class="icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" alt="Target icon">
+                    </div>
+                    <div>
+                        <h3>Office hours with Mentors for clearing blockers</h3>
+                        <p>Overcome challenges fast with dedicated mentor office hours.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="feature">
-                <div class="icon-box">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" alt="Office hours with mentors">
+
+                <div class="feature">
+                    <div class="icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" alt="Copy icon">
+                    </div>
+                    <div>
+                        <h3>Project driven approach to achieve outcomes</h3>
+                        <p>Gain practical skills through our project-driven approach for real results.</p>
+                    </div>
                 </div>
-                <div>
-                    <h3>Office hours with Mentors for clearing blockers</h3>
-                    <p>Overcome challenges fast with dedicated mentor office hours.</p>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="icon-box">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" alt="Project driven approach">
-                </div>
-                <div>
-                    <h3>Project driven approach to achieve outcomes</h3>
-                    <p>Gain practical skills through our project-driven approach for real results.</p>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="icon-box">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" alt="Network of learners">
-                </div>
-                <div>
-                    <h3>Access to network of 1000+ learners</h3>
-                    <p>Tap into our vibrant network of learners, enhancing your learning experience.</p>
+
+                <div class="feature">
+                    <div class="icon-box">
+                        <img src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" alt="User icon">
+                    </div>
+                    <div>
+                        <h3>Access to network of 1000+ learners</h3>
+                        <p>Tap into our vibrant network of learners, enhancing your learning experience.</p>
+                    </div>
                 </div>
             </div>
         </div>
