@@ -194,7 +194,7 @@
             background: var(--color-white);
             z-index: 90;
             transform: translateY(-110%);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 24px 5%;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             display: flex;
@@ -204,6 +204,12 @@
 
         #mobileMenu.active {
             transform: translateY(0);
+        }
+
+        /* When navbar is hidden, push menu off-screen with it */
+        .header.nav-hidden ~ #mobileMenu {
+            top: 0;
+            transform: translateY(-110%);
         }
 
         .mobile-nav-link {
