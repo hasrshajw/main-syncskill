@@ -71,12 +71,18 @@
             box-shadow: none;
             display: flex;
             align-items: center;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .header.scrolled {
             border-bottom-color: #f1f5f9;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 767px) {
+            .header.nav-hidden {
+                top: calc(-1 * var(--header-height));
+            }
         }
 
         .header-container {
@@ -1385,10 +1391,55 @@
             const menuOverlay = document.getElementById('menuOverlay');
             const header = document.querySelector('.header');
 
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
             function updateHeaderOnScroll() {
-                header.classList.toggle('scrolled', window.scrollY > 0);
+                const currentScrollY = window.scrollY;
+                const isMobile = window.innerWidth < 768;
+
+                // Scrolled shadow
+                header.classList.toggle('scrolled', currentScrollY > 0);
+
+                // Mobile-only: hide on scroll down, show on scroll up
+                if (isMobile) {
+                    const scrollDelta = currentScrollY - lastScrollY;
+                    // Only trigger after scrolling past the header itself
+                    if (currentScrollY > 80) {
+                        if (scrollDelta > 4) {
+                            // Scrolling DOWN — hide navbar
+                            header.classList.add('nav-hidden');
+                            // Also close mobile menu if open
+                            if (mobileMenu.classList.contains('active')) {
+                                mobileMenu.classList.remove('active');
+                                menuOverlay.classList.remove('active');
+                                document.body.style.overflow = '';
+                                setMenuIcon(false);
+                            }
+                        } else if (scrollDelta < -4) {
+                            // Scrolling UP — show navbar
+                            header.classList.remove('nav-hidden');
+                        }
+                    } else {
+                        // Near top — always show
+                        header.classList.remove('nav-hidden');
+                    }
+                } else {
+                    // Desktop — always visible
+                    header.classList.remove('nav-hidden');
+                }
+
+                lastScrollY = currentScrollY;
+                ticking = false;
             }
-            window.addEventListener('scroll', updateHeaderOnScroll);
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateHeaderOnScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+
             updateHeaderOnScroll();
 
             const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
@@ -1409,11 +1460,15 @@
             menuOverlay.addEventListener('click', toggleMenu);
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    menuOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                    setMenuIcon(false);
+                if (window.innerWidth >= 768) {
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        menuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                        setMenuIcon(false);
+                    }
+                    // Always show navbar on desktop
+                    header.classList.remove('nav-hidden');
                 }
             });
 
