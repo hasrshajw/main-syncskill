@@ -61,15 +61,11 @@
             --color-teal-hover: #004D4B;
             --font-weight-medium: 500;
             --header-height: 72px;
-            --font-body: 'IBM Plex Sans', sans-serif;
-            --font-display: 'Fraunces', serif;
+            /* additional for proof ticker & skills grid */
+            --green: #33C375;
             --teal: #002726;
             --teal-mid: #004D4B;
-            --green: #33C375;
-            --green-light: #52e094;
-            --green-pale: #eefcf4;
             --white: #ffffff;
-            --off-white: #f8f9fa;
             --text-mid: #4a5568;
             --border: rgba(0,0,0,0.07);
             --border-strong: rgba(0,0,0,0.12);
@@ -77,6 +73,8 @@
             --ease-smooth: cubic-bezier(0.4,0,0.2,1);
             --radius-lg: 24px;
             --radius-xl: 32px;
+            --font-body: 'IBM Plex Sans', sans-serif;
+            --font-display: 'Fraunces', serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { background-color: #fcfcfc; font-family: var(--font-main); overflow-x: hidden; padding-top: var(--header-height); }
@@ -141,7 +139,7 @@
         .dash-left-main::before { left: 0; background: linear-gradient(to right, var(--bg-cream), transparent); }
         .dash-left-main::after { right: 0; background: linear-gradient(to left, var(--bg-cream), transparent); }
 
-        /* --- PROOF TICKER (added) --- */
+        /* ===== PROOF TICKER (new) ===== */
         .proof-ticker {
             background: linear-gradient(135deg, #002726 0%, #003d3b 100%);
             padding: 16px 0;
@@ -182,7 +180,7 @@
             font-weight: 700;
         }
 
-        /* --- SKILLS SECTION (grid version, added) --- */
+        /* ===== SKILLS GRID SECTION (new) ===== */
         .skills-section {
             padding: 96px 0 80px;
             background: var(--white);
@@ -314,8 +312,20 @@
             width: 12px;
             height: 12px;
         }
+        /* reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
 
-        /* existing courses, scholarship, why, footer styles (unchanged) */
+        /* === remaining existing styles (courses, scholarship, footer) unchanged === */
         .courses-section { width: 100%; background-color: #ffffff; padding: 50px 0; display: flex; flex-direction: column; align-items: center; position: relative; overflow-x: hidden; font-family: var(--courses-font-main); }
         .courses-section .container-lg { width: 92%; max-width: 1400px; margin: 0 auto; padding: 0 4rem; }
         .courses-section .section-header-left { text-align: left; margin-bottom: 60px; max-width: 700px; margin-left: 0; margin-right: auto; }
@@ -431,40 +441,27 @@
         .copyright-links a:hover { color: #33c375; }
         @media (max-width: 1024px) { .subscribe-card { flex-direction: column; align-items: flex-start; padding: 40px; } .subscribe-form-area { width: 100%; margin-top: 20px; } .footer-bottom { flex-direction: column; gap: 50px; } .footer-links-container { gap: 60px; width: 100%; justify-content: space-between; } }
         @media (max-width: 768px) { .subscribe-info h2 { font-size: var(--font-3xl); } .subscribe-form { flex-direction: column; } .footer-links-container { justify-content: flex-start; } .upper-half { padding-bottom: 240px; } .lower-half { padding-top: 340px; padding-left: 20px; padding-right: 20px; } .footer-copyright-bar { flex-direction: column; gap: 16px; text-align: center; } .copyright-links { justify-content: center; flex-wrap: wrap; } .copyright-links a { font-size: 14px; } }
-
-        /* reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.08s; }
-        .reveal-delay-2 { transition-delay: 0.16s; }
-        .reveal-delay-3 { transition-delay: 0.24s; }
     </style>
 </head>
 <body>
 
-    <!-- ===== NEW NAVBAR (extracted) ===== -->
-    <header class="header" id="mainHeader">
+    <!-- ===== NAVBAR ===== -->
+    <header class="header">
         <div class="header-container">
             <div class="nav-left">
                 <a href="/index.html" aria-label="Home">
                     <img class="logo" src="https://syncskill.in/assets/syncskill-logo.svg" alt="SyncSkill Logo">
                 </a>
-                <nav class="nav-links">
+                <div class="nav-links">
                     <a class="nav-link" href="/upskill.html">Upskill your Team</a>
                     <a class="nav-link" href="/about.html">About</a>
-                    <a class="nav-link" href="/programs.html">Programs</a>
-                </nav>
+                </div>
             </div>
             <div class="nav-right">
                 <button class="menu-button" id="mobileMenuButton" aria-label="Menu">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
                 </button>
                 <div class="auth-buttons">
                     <a class="auth-button submit" href="/login.html">Login</a>
@@ -478,7 +475,6 @@
     <div id="mobileMenu">
         <a href="/upskill.html" class="mobile-nav-link">Upskill your Team</a>
         <a href="/about.html" class="mobile-nav-link">About</a>
-        <a href="/programs.html" class="mobile-nav-link">Programs</a>
         <div class="mobile-auth-stack">
             <a href="/login.html" class="mobile-auth-button submit">Login</a>
             <a href="/apply.html" class="mobile-auth-button">Apply as Mentor</a>
@@ -486,7 +482,7 @@
     </div>
     <div id="menuOverlay"></div>
 
-    <!-- SECTION 1: HERO (unchanged) -->
+    <!-- SECTION 1: HERO -->
     <section class="hero-section">
         <div class="content-card">
             <div class="hero-flex">
@@ -513,7 +509,7 @@
         </div>
     </section>
 
-    <!-- SECTION 2: DASHBOARD (unchanged) -->
+    <!-- SECTION 2: DASHBOARD -->
     <section class="dashboard-container">
         <div class="dash-left-main">
             <div class="section-header-dash">
@@ -538,7 +534,6 @@
                         <div class="icon-box"><i data-lucide="users"></i></div>
                         <div class="card-content"><span class="card-title">Cohort Groups</span><p class="card-desc">Peer-to-peer learning</p></div>
                     </a>
-                    <!-- duplicates for loop -->
                     <a class="feature-card" href="/mentorship.html" style="--theme-color: #6366f1;"><div class="icon-box"><i data-lucide="zap"></i></div><div class="card-content"><span class="card-title">Live Mentorship</span><p class="card-desc">Industry expert sessions</p></div></a>
                     <a class="feature-card" href="/certificates.html" style="--theme-color: #ec4899;"><div class="icon-box"><i data-lucide="shield-check"></i></div><div class="card-content"><span class="card-title">Verified Certs</span><p class="card-desc">ISO recognized credentials</p></div></a>
                     <a class="feature-card" href="/projects.html" style="--theme-color: #f59e0b;"><div class="icon-box"><i data-lucide="layers"></i></div><div class="card-content"><span class="card-title">Real Projects</span><p class="card-desc">Build production apps</p></div></a>
@@ -553,7 +548,7 @@
         </div>
     </section>
 
-    <!-- NEW PROOF TICKER (inserted after dashboard) -->
+    <!-- ===== NEW: PROOF TICKER ===== -->
     <div class="proof-ticker">
         <div class="proof-ticker-inner">
             <div class="proof-item"><div class="proof-dot"></div><span><strong>Arjun K.</strong> landed a PM role at Razorpay — 3 months after graduating</span></div>
@@ -571,7 +566,7 @@
         </div>
     </div>
 
-    <!-- NEW SKILLS SECTION (grid version) -->
+    <!-- ===== NEW: SKILLS GRID SECTION ===== -->
     <section class="skills-section">
         <div class="section-wrap">
             <div class="skills-header reveal">
@@ -620,7 +615,7 @@
         </div>
     </section>
 
-    <!-- SECTION 4: COURSES (AI & Python) - unchanged -->
+    <!-- SECTION 4: COURSES (AI & Python) -->
     <section class="courses-section">
         <div class="container-lg">
             <div class="section-header-left">
@@ -770,7 +765,7 @@
         </div>
     </section>
 
-    <!-- SECTION 5: SCHOLARSHIP BANNER (unchanged) -->
+    <!-- SECTION 5: SCHOLARSHIP BANNER -->
     <div class="scholarship-outer-wrapper">
         <div class="scholarship-banner">
             <div class="content-left">
@@ -796,10 +791,9 @@
         </div>
     </div>
 
-    <!-- SECTION 6: MORE COURSES (Full-Stack & Cloud) - unchanged -->
+    <!-- SECTION 6: MORE COURSES (Full-Stack & Cloud) -->
     <section class="courses-section">
         <div class="container-lg">
-            <!-- Full-Stack Web Development -->
             <div class="category-section">
                 <h3 class="category-heading">
                     <i data-lucide="layout" style="width: 24px; color: var(--courses-primary-accent);"></i>
@@ -869,7 +863,6 @@
                 </div>
             </div>
 
-            <!-- Cloud Computing & DevOps -->
             <div class="category-section">
                 <h3 class="category-heading">
                     <i data-lucide="cloud" style="width: 24px; color: var(--courses-primary-accent);"></i>
@@ -941,7 +934,7 @@
         </div>
     </section>
 
-    <!-- WHY LEARN WITH US (unchanged) -->
+    <!-- WHY LEARN WITH US -->
     <section class="why-section">
         <div class="container-why">
             <h2>Why learn with SyncSkill?</h2>
@@ -978,7 +971,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (unchanged) -->
+    <!-- FOOTER -->
     <div class="page-container">
         <div class="upper-half">
             <div class="subscribe-card">
@@ -1039,62 +1032,54 @@
         </div>
     </div>
 
-    <!-- Combined scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
             lucide.createIcons();
 
-            // ----- Navbar functionality (from extracted code) -----
-            const header = document.getElementById('mainHeader');
+            // Navbar scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 0);
+            });
+
+            // Mobile menu toggle
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileMenuButton = document.getElementById('mobileMenuButton');
             const menuOverlay = document.getElementById('menuOverlay');
+            const hamburgerSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+            const closeSVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>';
 
-            // Scroll effect
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 10) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }, { passive: true });
-
-            // Mobile menu toggle icons
-            const hamburgerSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
-            const closeSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>';
-
+            function setMenuIcon(isOpen) { mobileMenuButton.innerHTML = isOpen ? closeSVG : hamburgerSVG; }
             function toggleMenu() {
-                const active = mobileMenu.classList.toggle('active');
-                menuOverlay.classList.toggle('active', active);
-                mobileMenuButton.innerHTML = active ? closeSVG : hamburgerSVG;
-                document.body.style.overflow = active ? 'hidden' : '';
+                const isActive = mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                setMenuIcon(isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
             }
-
             mobileMenuButton.addEventListener('click', toggleMenu);
             menuOverlay.addEventListener('click', toggleMenu);
-
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', () => {
                 if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
                     mobileMenu.classList.remove('active');
                     menuOverlay.classList.remove('active');
-                    mobileMenuButton.innerHTML = hamburgerSVG;
                     document.body.style.overflow = '';
+                    setMenuIcon(false);
                 }
             });
+            setMenuIcon(false);
 
-            // ----- Scroll reveal (for skills header) -----
-            const revealObserver = new IntersectionObserver((entries) => {
+            // Reveal animation for new sections
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        revealObserver.unobserve(entry.target);
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // ----- Firebase form (unchanged) -----
+            // Firebase form (unchanged)
             const firebaseConfig = {
                 apiKey: "YOUR_API_KEY",
                 authDomain: "YOUR_AUTH_DOMAIN",
